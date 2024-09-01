@@ -25,7 +25,23 @@ class Auth:
 
     @log_decorator
     def login(self):
-        pass
+        username: str = input("Enter your username: ")
+        password: str = input("Enter your password: ")
+        query = '''
+        SELECT * FROM users WHERE USERNAME = %S AND PASSWORD = %s;
+        '''
+        params = (username, password)
+        result_get = execute_query(query, params, fetch='one')
+        if result_get is None:
+            print("Invalid username or password!")
+            return False
+        query = '''
+        UPDATE users SET IS_LOGIN = TRUE WHERE ID=%s;
+        '''
+        params = (result_get['id'],)
+        threading.Thread(target=execute_query, args=(query, params)).start()
+        print("Login successful!")
+        return True
 
     @log_decorator
     def register(self):
