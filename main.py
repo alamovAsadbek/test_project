@@ -90,6 +90,11 @@ def my_test_menu():
 
 
 @log_decorator
+def tests_menu():
+    pass
+
+
+@log_decorator
 def statistics_menu():
     text = '''
 1. View statistics on tests
