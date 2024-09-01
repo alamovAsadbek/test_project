@@ -94,7 +94,7 @@ def tests_menu():
         if user_input == 1:
             pass
         elif user_input == 2:
-            pass
+            user_menu()
         else:
             print("Invalid input")
             tests_menu()
