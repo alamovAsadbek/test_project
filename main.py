@@ -27,7 +27,18 @@ def auth_menu():
 
 @log_decorator
 def user_menu():
-    pass
+    text = '''
+1. My Tests
+2. Tests
+3. Statistics
+4. Logout
+    '''
+    print(text)
+    try:
+        pass
+    except Exception as e:
+        print(f'Error: {e}')
+        user_menu()
 
 
 if __name__ == '__main__':
