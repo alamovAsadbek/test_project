@@ -1,5 +1,4 @@
 import psycopg2
-from psycopg2 import sql
 from psycopg2.extras import DictCursor
 
 from main_files.database.config import config
@@ -65,13 +64,3 @@ def execute_query(query, params=None, fetch=None):
                 db.execute(query, params)
     except Exception as e:
         print(f"Exception occurred while executing: {e}")
-
-
-@log_decorator
-def get_active(table_name: str):
-    query = sql.SQL('''
-    SELECT * FROM {} WHERE IS_LOGIN=TRUE;
-    ''').format(
-        sql.Identifier(table_name),
-    )
-    return execute_query(query, fetch='one')
