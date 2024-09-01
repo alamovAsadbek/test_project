@@ -29,9 +29,9 @@ class Auth:
         username: str = input("Enter your username: ").strip()
         password: str = hashlib.sha256(input("Enter your password: ").strip().encode('utf-8')).hexdigest()
         query = '''
-        SELECT * FROM users WHERE USERNAME = %S AND PASSWORD = %s;
+        SELECT * FROM users WHERE USERNAME = %s AND PASSWORD = %s
         '''
-        params = (username, password)
+        params = (username, password,)
         result_get = execute_query(query, params, fetch='one')
         if result_get is None:
             print("Invalid username or password!")
