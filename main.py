@@ -21,7 +21,9 @@ def auth_menu():
             else:
                 auth_menu()
         elif user_input == 3:
-            pass
+            auth.logout()
+            print("Good bye!")
+            return
         else:
             print("Invalid input")
         auth_menu()
