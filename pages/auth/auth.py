@@ -41,7 +41,15 @@ class Auth:
 
     @log_decorator
     def create_question_table(self):
-        pass
+        query = '''
+        CREATE TABLE IF NOT EXISTS questions (
+        ID SERIAL PRIMARY KEY,
+        TEST_ID BIGINT REFERENCES tests(ID) NOT NULL,
+        NAME VARCHAR(255) NOT NULL
+        )
+        '''
+        execute_query(query)
+        return True
 
     @log_decorator
     def login(self):
@@ -90,6 +98,7 @@ class Auth:
     def logout(self):
         self.create_user_table()
         threading.Thread(target=self.create_test_table).start()
+        threading.Thread(target=self.create_question_table).start()
         query = '''UPDATE users SET IS_LOGIN=FALSE;'''
         execute_query(query)
         return True
