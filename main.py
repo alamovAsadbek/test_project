@@ -37,13 +37,16 @@ def user_menu():
     try:
         user_input: int = int(input("Choose menu: "))
         if user_input == 1:
+            print("\n<-\t Home / My Tests\t ->\n")
             pass
         elif user_input == 2:
+            print("\n<-\t Home / Tests\t ->\n")
             pass
         elif user_input == 3:
+            print("\n<-\t Home / Statistics\t ->\n")
             pass
         elif user_input == 4:
-            pass
+            auth_menu()
         else:
             print("Invalid input")
             user_menu()
@@ -65,12 +68,16 @@ def my_test_menu():
     try:
         user_input: int = int(input("Choose menu: "))
         if user_input == 1:
+            print("\n<-\t Home / My Tests / Create new test\t ->\n")
             pass
         elif user_input == 2:
+            print("\n<-\t Home / My Tests / Update test\t ->\n")
             pass
         elif user_input == 3:
+            print("\n<-\t Home / My Tests / My tests\t ->\n")
             pass
         elif user_input == 4:
+            print("\n<-\t Home / My Tests / Delete test\t ->\n")
             pass
         elif user_input == 5:
             user_menu()
@@ -83,7 +90,7 @@ def my_test_menu():
 
 
 @log_decorator
-def tests_menu():
+def statistics_menu():
     text = '''
 1. View statistics on tests
 2. Back
@@ -92,15 +99,16 @@ def tests_menu():
     try:
         user_input: int = int(input("Choose menu: "))
         if user_input == 1:
+            print("\n<-\t Home / Statistics / View statistics on tests\t ->\n")
             pass
         elif user_input == 2:
             user_menu()
         else:
             print("Invalid input")
-            tests_menu()
+            statistics_menu()
     except Exception as e:
         print(f'Error: {e}')
-        tests_menu()
+        statistics_menu()
 
 
 if __name__ == '__main__':
