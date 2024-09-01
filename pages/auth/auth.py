@@ -46,7 +46,8 @@ class Auth:
 
     @log_decorator
     def hash_password(self, password):
-        pass
+        hashed_password = hashlib.sha256(password.__str__().encode('utf-8'))
+        return hashed_password.hexdigest()
 
     @log_decorator
     def register(self):
@@ -55,13 +56,13 @@ class Auth:
         print("Your account is being created...")
         username = get_username(name=first_name)
         password = generate_password()
-        hash_password = hashlib.sha256(password)
+        hash_password = self.hash_password(password)
         print(f"\nYour username: {username}\nYour password: {password}")
         query = '''
         INSERT INTO users (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD) 
         VALUES (%s, %s, %s, %s);
         '''
-        params = (first_name, last_name, username, password)
+        params = (first_name, last_name, username, hash_password)
         threading.Thread(target=execute_query, args=(query, params)).start()
         print("Register successfully")
         return True
