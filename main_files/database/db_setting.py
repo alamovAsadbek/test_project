@@ -6,6 +6,7 @@ from main_files.database.config import config
 from main_files.decorator.decorator_func import log_decorator
 
 
+# class Database
 class Database:
     def __init__(self):
         self.connection = None
