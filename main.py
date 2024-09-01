@@ -143,6 +143,7 @@ def statistics_menu():
 
 
 if __name__ == '__main__':
+    print("Waiting...")
     auth = Auth()
     auth.logout()
     auth_menu()
