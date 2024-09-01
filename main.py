@@ -91,7 +91,18 @@ def my_test_menu():
 
 @log_decorator
 def tests_menu():
-    pass
+    text = '''
+1. Join test
+2. Show all test
+3. My results
+4. Back
+    '''
+    print(text)
+    try:
+        pass
+    except Exception as e:
+        print(f'Error: {e}')
+        tests_menu()
 
 
 @log_decorator
