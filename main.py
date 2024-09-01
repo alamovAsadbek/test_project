@@ -25,5 +25,10 @@ def auth_menu():
         auth_menu()
 
 
+@log_decorator
+def user_menu():
+    pass
+
+
 if __name__ == '__main__':
     auth_menu()
