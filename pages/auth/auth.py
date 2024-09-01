@@ -25,7 +25,8 @@ class Auth:
 
     @log_decorator
     def register(self):
-        pass
+        first_name: str = input("First Name: ")
+        last_name: str = input("Last Name: ")
 
     @log_decorator
     def logout(self):
