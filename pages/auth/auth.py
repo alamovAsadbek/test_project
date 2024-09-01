@@ -1,3 +1,5 @@
+import threading
+
 from components.random_password.generate_password import generate_password
 from components.random_username.generate_username import get_username
 from main_files.database.db_setting import execute_query
@@ -33,6 +35,13 @@ class Auth:
         username = get_username(name=first_name)
         password = generate_password()
         print(f"\nYour username: {username}\nYour password: {password}")
+        query = '''
+        INSERT INTO users (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD) 
+        VALUES (%s, %s, %s, %s);
+        '''
+        params = (first_name, last_name, username, password)
+        threading.Thread(target=execute_query, args=(query, params)).start()
+        print("Register successfully")
         return True
 
     @log_decorator
