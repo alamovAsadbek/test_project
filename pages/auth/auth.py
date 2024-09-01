@@ -1,3 +1,5 @@
+from components.random_password.generate_password import generate_password
+from components.random_username.generate_username import get_username
 from main_files.database.db_setting import execute_query
 from main_files.decorator.decorator_func import log_decorator
 
@@ -27,6 +29,11 @@ class Auth:
     def register(self):
         first_name: str = input("First Name: ")
         last_name: str = input("Last Name: ")
+        print("Your account is being created...")
+        username = get_username(name=first_name)
+        password = generate_password()
+        print(f"\nYour username: {username}\nYour password: {password}")
+        return True
 
     @log_decorator
     def logout(self):

@@ -1,4 +1,4 @@
-from random import random
+import random
 
 from main_files.decorator.decorator_func import log_decorator
 
