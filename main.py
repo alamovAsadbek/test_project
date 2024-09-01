@@ -84,7 +84,16 @@ def my_test_menu():
 
 @log_decorator
 def tests_menu():
-    pass
+    text = '''
+1. View statistics on tests
+2. Back
+    '''
+    print(text)
+    try:
+        pass
+    except Exception as e:
+        print(f'Error: {e}')
+        tests_menu()
 
 
 if __name__ == '__main__':
