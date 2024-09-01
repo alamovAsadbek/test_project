@@ -5,7 +5,7 @@ from main_files.decorator.decorator_func import log_decorator
 
 
 @log_decorator
-def generate_username(self, name: str) -> str:
+def generate_username(name: str) -> str:
     # Strip and lower case the name
     base_name = name.strip().lower()
     # Replace spaces with underscores
