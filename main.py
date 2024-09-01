@@ -99,7 +99,21 @@ def tests_menu():
     '''
     print(text)
     try:
-        pass
+        user_input: int = int(input("Choose menu: "))
+        if user_input == 1:
+            print("\n<-\t Home / Tests / Join test\t ->\n")
+            pass
+        elif user_input == 2:
+            print("\n<-\t Home / Tests / Show all test\t ->\n")
+            pass
+        elif user_input == 3:
+            print("\n<-\t Home / Tests / My tests\t ->\n")
+            pass
+        elif user_input == 4:
+            user_menu()
+        else:
+            print("Invalid input")
+            tests_menu()
     except Exception as e:
         print(f'Error: {e}')
         tests_menu()
