@@ -54,7 +54,19 @@ def user_menu():
 
 @log_decorator
 def my_test_menu():
-    pass
+    text = '''
+1. Create new test
+2. Update test
+3. My tests
+4. Delete test
+5. Back
+    '''
+    print(text)
+    try:
+        pass
+    except Exception as e:
+        print(f'Error: {e}')
+        my_test_menu()
 
 
 if __name__ == '__main__':
