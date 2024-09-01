@@ -45,13 +45,13 @@ def user_menu():
         user_input: int = int(input("Choose menu: "))
         if user_input == 1:
             print("\n<-\t Home / My Tests\t ->\n")
-            pass
+            my_test_menu()
         elif user_input == 2:
             print("\n<-\t Home / Tests\t ->\n")
-            pass
+            tests_menu()
         elif user_input == 3:
             print("\n<-\t Home / Statistics\t ->\n")
-            pass
+            statistics_menu()
         elif user_input == 4:
             auth_menu()
         else:
