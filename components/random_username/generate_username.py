@@ -1,6 +1,7 @@
 import re
 from random import random
 
+from main_files.database.db_setting import execute_query
 from main_files.decorator.decorator_func import log_decorator
 
 
@@ -19,4 +20,14 @@ def generate_username(name: str) -> str:
 
 @log_decorator
 def get_username(name: str) -> str:
-    pass
+    while True:
+        username = generate_username(name)
+        query = '''
+         SELECT * FROM employees WHERE username=?s;
+         '''
+        params = (username,)
+        result = execute_query(query, params)
+        if result is not None:
+            continue
+        return username
+
