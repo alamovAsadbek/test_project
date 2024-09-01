@@ -1,3 +1,4 @@
+import hashlib
 import threading
 
 from components.random_password.generate_password import generate_password
@@ -25,8 +26,8 @@ class Auth:
 
     @log_decorator
     def login(self):
-        username: str = input("Enter your username: ")
-        password: str = input("Enter your password: ")
+        username: str = input("Enter your username: ").strip()
+        password: str = hashlib.sha256(input("Enter your password: ").strip().encode('utf-8')).hexdigest()
         query = '''
         SELECT * FROM users WHERE USERNAME = %S AND PASSWORD = %s;
         '''
@@ -44,12 +45,17 @@ class Auth:
         return True
 
     @log_decorator
+    def hash_password(self, password):
+        pass
+
+    @log_decorator
     def register(self):
-        first_name: str = input("First Name: ")
-        last_name: str = input("Last Name: ")
+        first_name: str = input("First Name: ").strip()
+        last_name: str = input("Last Name: ").strip()
         print("Your account is being created...")
         username = get_username(name=first_name)
         password = generate_password()
+        hash_password = hashlib.sha256(password)
         print(f"\nYour username: {username}\nYour password: {password}")
         query = '''
         INSERT INTO users (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD) 
