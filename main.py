@@ -90,7 +90,14 @@ def tests_menu():
     '''
     print(text)
     try:
-        pass
+        user_input: int = int(input("Choose menu: "))
+        if user_input == 1:
+            pass
+        elif user_input == 2:
+            pass
+        else:
+            print("Invalid input")
+            tests_menu()
     except Exception as e:
         print(f'Error: {e}')
         tests_menu()
