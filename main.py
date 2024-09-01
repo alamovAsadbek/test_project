@@ -82,5 +82,10 @@ def my_test_menu():
         my_test_menu()
 
 
+@log_decorator
+def tests_menu():
+    pass
+
+
 if __name__ == '__main__':
     auth_menu()
