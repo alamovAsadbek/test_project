@@ -15,3 +15,8 @@ def generate_username(name: str) -> str:
     # Generate a random number
     random_number = random.randint(1, 9999)
     return f"{base_name}_{random_number}"
+
+
+@log_decorator
+def get_username(name: str) -> str:
+    pass
