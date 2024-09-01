@@ -24,6 +24,10 @@ class Auth:
         pass
 
     @log_decorator
+    def register(self):
+        pass
+
+    @log_decorator
     def logout(self):
         self.create_user_table()
         query = '''UPDATE users SET IS_LOGIN=FALSE;'''
