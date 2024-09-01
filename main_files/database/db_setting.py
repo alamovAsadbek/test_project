@@ -64,3 +64,8 @@ def execute_query(query, params=None, fetch=None):
                 db.execute(query, params)
     except Exception as e:
         print(f"Exception occurred while executing: {e}")
+
+
+@log_decorator
+def get_active_user():
+    pass
