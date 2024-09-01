@@ -23,10 +23,10 @@ def get_username(name: str) -> str:
     while True:
         username = generate_username(name)
         query = '''
-         SELECT * FROM users WHERE username=?s;
+         SELECT * FROM users WHERE USERNAME=%s;
          '''
         params = (username,)
-        result = execute_query(query, params)
+        result = execute_query(query, params, fetch='one')
         if result is not None:
             continue
         return username
