@@ -18,3 +18,7 @@ class Auth:
         '''
         execute_query(query)
         return True
+
+    @log_decorator
+    def logout(self):
+        pas
