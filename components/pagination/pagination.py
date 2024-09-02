@@ -14,7 +14,7 @@ class Pagination:
         return execute_query(query, fetch='all')
 
     @log_decorator
-    def page_tab(self, page_number: int = 1, page_size=5):
+    def page_tab(self, page_number: int = 1, page_size=2):
         datas = self.read_table()
         print(datas)
         while True:
