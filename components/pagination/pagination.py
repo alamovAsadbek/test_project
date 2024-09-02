@@ -9,13 +9,13 @@ class Pagination:
         self.table_name = table_name
 
     @log_decorator
-    def read_table(self):
+    def __read_table(self):
         query = "SELECT * FROM {}".format(self.table_name)
         return execute_query(query, fetch='all')
 
     @log_decorator
     def page_tab(self, page_number: int = 1, page_size=2):
-        datas = self.read_table()
+        datas = self.__read_table()
         while True:
             if datas is None:
                 return False
