@@ -71,3 +71,4 @@ class Test:
             for q_answer in range(number_of_answers):
                 print(f'Question: {ques + 1} / Question answer: {q_answer + 1}')
                 self.question_answer()
+        return True
