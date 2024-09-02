@@ -79,6 +79,6 @@ class Test:
     @log_decorator
     def show_all_tests(self):
         pagination = Pagination(table_name='tests', keys=['name', 'test_id', 'status', 'created_at'],
-                                user_id=self.__active_user['if'])
+                                user_id=self.__active_user['id'])
         pagination.page_tab()
         return True
