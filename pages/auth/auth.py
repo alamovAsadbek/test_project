@@ -58,7 +58,7 @@ class Auth:
         ID SERIAL PRIMARY KEY,
         QUESTION_ID BIGINT REFERENCES questions(ID),
         NAME VARCHAR(255) NOT NULL,
-        IS_TRUE BOOLEAN DEFAULT FALSE,
+        IS_TRUE BOOLEAN DEFAULT FALSE
         )
         '''
         execute_query(query)
@@ -66,7 +66,18 @@ class Auth:
 
     @log_decorator
     def create_answers_table(self):
-        pass
+        query = '''
+        CREATE TABLE IF NOT EXISTS answers (
+        ID SERIAL PRIMARY KEY,
+        USER_ID BIGINT REFERENCES users(ID) NOT NULL,
+        TEST_ID BIGINT REFERENCES tests(ID) NOT NULL,
+        CORRECT_ANSWERS BIGINT NOT NULL,
+        WRONG_ANSWERS BIGINT NOT NULL,
+        CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+        '''
+        execute_query(query)
+        return True
 
     @log_decorator
     def login(self):
