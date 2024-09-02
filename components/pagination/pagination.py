@@ -10,3 +10,6 @@ class Pagination:
     def read_table(self):
         query = "SELECT * FROM {}".format(self.table_name)
         return execute_query(query, fetch='all')
+    @log_decorator
+    def page_tab(self):
+        pass
