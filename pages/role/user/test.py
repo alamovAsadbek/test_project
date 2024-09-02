@@ -13,3 +13,5 @@ class Test:
         number_of_questions: int = int(input("Enter number of questions: ").strip())
         number_of_answers: int = int(input("Enter number of answers: ").strip())
         test_id = generate_password()
+        print(f"Your test id: {test_id}")
+        
