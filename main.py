@@ -96,6 +96,7 @@ def user_menu():
 
 @log_decorator
 def my_test_menu():
+    print("Waiting...")
     user = User()
     text = '''
 1. Create new test
