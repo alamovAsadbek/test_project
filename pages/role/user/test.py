@@ -20,8 +20,10 @@ class Test:
             print('\n1. Yes\t2. No\t\n')
             check = int(input("Choose: "))
             if check == 1:
+                print("The answer is confirmed")
                 is_true = True
             elif check == 2:
+                print("The answer is confirmed")
                 is_true = False
             else:
                 print("Wrong input")
