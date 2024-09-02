@@ -142,6 +142,9 @@ class Auth:
         self.create_user_table()
         threading.Thread(target=self.create_test_table).start()
         threading.Thread(target=self.create_question_table).start()
+        threading.Thread(target=self.create_option_table).start()
+        threading.Thread(target=self.create_answers_table).start()
+        threading.Thread(target=self.create_answer_items_table).start()
         query = '''UPDATE users SET IS_LOGIN=FALSE;'''
         execute_query(query)
         return True
