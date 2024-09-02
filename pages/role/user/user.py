@@ -10,3 +10,7 @@ class User:
     def create_test(self):
         self.__test.create_test()
         return self.__test
+
+    @log_decorator
+    def show_all_tests(self):
+        pass
