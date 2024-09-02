@@ -64,6 +64,9 @@ class Auth:
         execute_query(query)
         return True
 
+    @log_decorator
+    def create_answers_table(self):
+        pass
 
     @log_decorator
     def login(self):
