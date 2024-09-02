@@ -1,0 +1,2 @@
+class Pagination(object):
+    pass
