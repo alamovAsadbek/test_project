@@ -96,3 +96,9 @@ class Test:
             return False
         print(f"ID: {get_test['id']}\nName: {get_test['name']}\nCreated at: {get_test['created_at']}")
         name = input("Enter new name: ").strip()
+        query = '''
+        UPDATE tests SET name=%s WHERE id=%s
+        '''
+        params = (name, test_id)
+        threading.Thread(target=execute_query, args=(query, params)).start()
+        return True
