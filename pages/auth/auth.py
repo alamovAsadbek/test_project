@@ -110,7 +110,7 @@ class Auth:
         password: str = hashlib.sha256(input("Enter your password: ").strip().encode('utf-8')).hexdigest()
         if (username == self.__admin_username and
                 password == hashlib.sha256(self.__admin_password.encode('utf-8')).hexdigest()):
-            pass
+            return {'is_login': True, 'role': "admin"}
         query = '''
         SELECT * FROM users WHERE USERNAME = %s AND PASSWORD = %s
         '''
@@ -118,14 +118,14 @@ class Auth:
         result_get = execute_query(query, params, fetch='one')
         if result_get is None:
             print("Invalid username or password!")
-            return False
+            return {'is_login': False}
         query = '''
         UPDATE users SET IS_LOGIN = TRUE WHERE ID=%s;
         '''
         params = (result_get['id'],)
         threading.Thread(target=execute_query, args=(query, params)).start()
         print("Login successful!")
-        return True
+        return {'is_login': True, 'role': "user"}
 
     @log_decorator
     def hash_password(self, password):
