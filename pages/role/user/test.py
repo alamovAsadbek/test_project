@@ -6,6 +6,8 @@ from main_files.decorator.decorator_func import log_decorator
 class Test:
     def __init__(self):
         self.__active_user = get_active_user()
+        self.__test_id = None
+        self.__question_id = None
 
     @log_decorator
     def question_func(self):
@@ -24,9 +26,9 @@ class Test:
         test_id = generate_password()
         print(f"Your test id: {test_id}")
         query = '''
-        INSERT INTO tests (name, test_id) VALUES (%s, %s)
-        RETURNING id
+        INSERT INTO tests (user_id, name, test_id) VALUES (%s, %s, %s)
+        RETURNING ID
         '''
-        params = (test_name, test_id)
-        result = execute_query(query, params)
-        print(result)
+        params = (self.__active_user['id'], test_name, test_id)
+        result = execute_query(query, params, fetch='one')
+        self.__test_id = result['id']
