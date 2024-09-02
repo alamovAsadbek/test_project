@@ -108,6 +108,9 @@ class Auth:
     def login(self):
         username: str = input("Enter your username: ").strip()
         password: str = hashlib.sha256(input("Enter your password: ").strip().encode('utf-8')).hexdigest()
+        if (username == self.__admin_username and
+                password == hashlib.sha256(self.__admin_password.encode('utf-8')).hexdigest()):
+            pass
         query = '''
         SELECT * FROM users WHERE USERNAME = %s AND PASSWORD = %s
         '''
