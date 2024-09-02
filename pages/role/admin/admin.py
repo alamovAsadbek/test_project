@@ -1,4 +1,5 @@
 from components.pagination.pagination import Pagination
+from main_files.database.db_setting import execute_query
 from main_files.decorator.decorator_func import log_decorator
 
 
@@ -14,7 +15,10 @@ class Admin:
 
     @log_decorator
     def get_data(self):
-        pass
+        query = '''
+        SELECT * FROM users WHERE ID=%s;
+        '''
+        return execute_query(query, fetch='one')
 
     @log_decorator
     def update_user(self):
