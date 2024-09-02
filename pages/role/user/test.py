@@ -10,6 +10,10 @@ class Test:
         self.__question_id = None
 
     @log_decorator
+    def question_answer(self):
+        pass
+
+    @log_decorator
     def question_func(self):
         question_name: str = input("Enter your question: ")
         query = '''
