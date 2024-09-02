@@ -16,9 +16,14 @@ def auth_menu():
             auth.register()
         elif user_input == 2:
             result_login = auth.login()
-            if result_login:
+            if not result_login['is_login']:
+                auth_menu()
+            elif result_login['role'] == 'user':
                 user_menu()
+            elif result_login['role'] == 'admin':
+                pass
             else:
+                print("Something went wrong")
                 auth_menu()
         elif user_input == 3:
             auth.logout()
