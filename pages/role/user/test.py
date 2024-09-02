@@ -106,6 +106,35 @@ class Test:
         threading.Thread(target=execute_query, args=(query, params)).start()
         print("Updated test successfully")
         return True
+
     @log_decorator
     def delete_test(self):
-        pass
+        test_id: int = int(input("Enter test id and enter 0 to exit: "))
+        if test_id == 0:
+            return False
+        query = '''
+                SELECT * FROM tests WHERE id=%s and user_id=%s
+                '''
+        params = (test_id, self.__active_user['id'])
+        get_test = execute_query(query, params, fetch='one')
+        if get_test is None:
+            print("Test not found")
+            return False
+        print(f"\nID: {get_test['id']}\nName: {get_test['name']}\nCreated at: {get_test['created_at']}\n")
+        while True:
+            print("Do you want to delete this test? (y/n)")
+            check = input("Choose(y/n): ")
+            if check == 'y':
+                query = '''
+                DELETE FROM tests WHERE id=%s
+                '''
+                params = (test_id,)
+                threading.Thread(target=execute_query, args=(query, params)).start()
+                print("Test deleted successfully")
+                return True
+            elif check == 'n':
+                print("Cancel")
+                return True
+            else:
+                print("Wrong input")
+                continue
