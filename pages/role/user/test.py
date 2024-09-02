@@ -1,3 +1,5 @@
+import threading
+
 from components.random_password.generate_password import generate_password
 from main_files.database.db_setting import get_active_user, execute_query
 from main_files.decorator.decorator_func import log_decorator
@@ -24,6 +26,12 @@ class Test:
                 print("Wrong input")
                 continue
             break
+        query = '''
+        INSERT INTO options (name, question_id, is_true) VALUES (%s, %s, %s)
+        '''
+        params = (answer_name, self.__question_id, is_true)
+        threading.Thread(target=execute_query, args=(query, params)).start()
+        return True
 
     @log_decorator
     def question_func(self):
