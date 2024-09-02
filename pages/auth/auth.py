@@ -111,6 +111,7 @@ class Auth:
         if (username == self.__admin_username and
                 password == hashlib.sha256(self.__admin_password.encode('utf-8')).hexdigest()):
             return {'is_login': True, 'role': "admin"}
+        print("Checked...")
         query = '''
         SELECT * FROM users WHERE USERNAME = %s AND PASSWORD = %s
         '''
