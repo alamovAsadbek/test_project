@@ -106,3 +106,6 @@ class Test:
         threading.Thread(target=execute_query, args=(query, params)).start()
         print("Updated test successfully")
         return True
+    @log_decorator
+    def delete_test(self):
+        pass
