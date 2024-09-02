@@ -11,7 +11,19 @@ class Test:
 
     @log_decorator
     def question_answer(self):
-        pass
+        is_true = False
+        answer_name: str = input("Enter the answers to the questions: ")
+        while True:
+            print("\nIs this the correct answer?")
+            check = input("\n1. Yes\t2. No\t\n")
+            if check == 1:
+                is_true = True
+            elif check == 2:
+                is_true = False
+            else:
+                print("Wrong input")
+                continue
+            break
 
     @log_decorator
     def question_func(self):
