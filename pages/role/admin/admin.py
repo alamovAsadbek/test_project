@@ -14,11 +14,12 @@ class Admin:
         return True
 
     @log_decorator
-    def get_data(self):
+    def get_data(self, table_name, data_id):
         query = '''
-        SELECT * FROM users WHERE ID=%s;
+        SELECT * FROM %s WHERE ID=%s;
         '''
-        return execute_query(query, fetch='one')
+        params = (table_name, data_id)
+        return execute_query(query, params, fetch='one')
 
     @log_decorator
     def update_user(self):
