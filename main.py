@@ -38,6 +38,11 @@ def auth_menu():
 
 
 @log_decorator
+def admin_menu():
+    pass
+
+
+@log_decorator
 def user_menu():
     text = '''
 1. My Tests
