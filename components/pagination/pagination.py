@@ -28,12 +28,14 @@ class Pagination:
                 return False
             result_data = self.get_page_data(page_number, page_size, datas)
             for data in result_data:
+                print("\n")
                 for key in self.keys:
-                    print(key)
-                    print(data[f'{key}'])
-            print(f"""1 <- {page_number}/{math.ceil(len(datas) / page_size)} -> 2""")
-            choice = input("Enter: ")
-            if choice == "1":
+                    print(f"{key}: {data[f'{key}']}")
+            print(f"""\n1 <- {page_number}/{math.ceil(len(datas) / page_size)} -> 2\n""")
+            choice = input("Enter, type exit to exit: ").strip()
+            if choice == "exit":
+                return True
+            elif choice == "1":
                 if page_number == 1:
                     print("There is no page before that")
                     continue
