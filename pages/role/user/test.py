@@ -1,5 +1,6 @@
 import threading
 
+from components.pagination.pagination import Pagination
 from components.random_password.generate_password import generate_password
 from main_files.database.db_setting import get_active_user, execute_query
 from main_files.decorator.decorator_func import log_decorator
@@ -77,4 +78,7 @@ class Test:
 
     @log_decorator
     def show_all_tests(self):
-        qu
+        pagination = Pagination(table_name='tests', keys=['name', 'test_id', 'status', 'created_at'],
+                                user_id=self.__active_user['if'])
+        pagination.page_tab()
+        return True

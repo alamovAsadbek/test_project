@@ -5,10 +5,10 @@ from main_files.decorator.decorator_func import log_decorator
 
 
 class Pagination:
-    def __init__(self, table_name, keys):
+    def __init__(self, table_name, keys, user_id=None):
         self.table_name = table_name
         self.keys = keys
-        self.user_id = None
+        self.user_id = user_id
 
     @log_decorator
     def __read_table(self):
