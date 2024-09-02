@@ -85,4 +85,14 @@ class Test:
 
     @log_decorator
     def update_test(self):
-        pass
+        test_id: int = int(input("Enter test id: "))
+        query = '''
+        SELECT * FROM tests WHERE test_id=%s and user_id=%s
+        '''
+        params = (test_id, self.__active_user['id'])
+        get_test = execute_query(query, params, fetch='one')
+        if get_test is None:
+            print("Test not found")
+            return False
+        print(f"ID: {get_test['id']}\nName: {get_test['name']}\nCreated at: {get_test['created_at']}")
+        name = input("Enter new name: ").strip()
