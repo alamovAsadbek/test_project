@@ -119,7 +119,7 @@ def my_test_menu():
             user.show_all_tests()
         elif user_input == 4:
             print("\n<-\t Home / My Tests / Delete test\t ->\n")
-            pass
+            user.delete_test()
         elif user_input == 5:
             return user_menu()
         else:
