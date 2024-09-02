@@ -21,7 +21,7 @@ def auth_menu():
             elif result_login['role'] == 'user':
                 user_menu()
             elif result_login['role'] == 'admin':
-                pass
+                admin_menu()
             else:
                 print("Something went wrong")
                 auth_menu()
