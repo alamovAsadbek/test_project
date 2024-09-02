@@ -22,6 +22,7 @@ class Pagination:
         datas = self.__read_table()
         while True:
             if datas is None:
+                print("Data not found")
                 return False
             result_data = datas[(page_number - 1) * page_size: (page_number - 1) * page_size + page_size]
             print(f"""1 <- {page_number}/{math.ceil(len(datas) / page_size)} -> 2""")
