@@ -82,3 +82,7 @@ class Test:
                                 user_id=self.__active_user['id'])
         pagination.page_tab()
         return True
+
+    @log_decorator
+    def update_test(self):
+        pass
