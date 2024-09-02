@@ -90,18 +90,19 @@ class Test:
         if test_id == 0:
             return False
         query = '''
-        SELECT * FROM tests WHERE test_id=%s and user_id=%s
+        SELECT * FROM tests WHERE id=%s and user_id=%s
         '''
         params = (test_id, self.__active_user['id'])
         get_test = execute_query(query, params, fetch='one')
         if get_test is None:
             print("Test not found")
             return False
-        print(f"ID: {get_test['id']}\nName: {get_test['name']}\nCreated at: {get_test['created_at']}")
+        print(f"\nID: {get_test['id']}\nName: {get_test['name']}\nCreated at: {get_test['created_at']}\n")
         name = input("Enter new name: ").strip()
         query = '''
         UPDATE tests SET name=%s WHERE id=%s
         '''
         params = (name, test_id)
         threading.Thread(target=execute_query, args=(query, params)).start()
+        print("Updated test successfully")
         return True
