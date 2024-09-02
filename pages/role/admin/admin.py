@@ -24,3 +24,5 @@ class Admin:
     @log_decorator
     def update_user(self):
         user_id: int = int(input("Enter user id to update: "))
+        get_data = self.get_data(table_name='users', data_id=user_id)
+        print(get_data)
