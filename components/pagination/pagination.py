@@ -14,8 +14,10 @@ class Pagination:
         return execute_query(query, fetch='all')
 
     @log_decorator
-    def get_page_data(self):
-        pass
+    def get_page_data(self, page_number=1, page_size=2):
+        datas = self.__read_table()
+        result_data = datas[(page_number - 1) * page_size: (page_number - 1) * page_size + page_size]
+        return result_data
 
     @log_decorator
     def page_tab(self, page_number: int = 1, page_size=2):
@@ -24,7 +26,7 @@ class Pagination:
             if datas is None:
                 print("Data not found")
                 return False
-            result_data = datas[(page_number - 1) * page_size: (page_number - 1) * page_size + page_size]
+            print(self.get_page_data(page_number, page_size))
             print(f"""1 <- {page_number}/{math.ceil(len(datas) / page_size)} -> 2""")
             choice = input("Enter: ")
             if choice == "1":
