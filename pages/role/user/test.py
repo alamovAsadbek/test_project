@@ -32,3 +32,5 @@ class Test:
         params = (self.__active_user['id'], test_name, test_id)
         result = execute_query(query, params, fetch='one')
         self.__test_id = result['id']
+        for _ in range(number_of_questions):
+            self.question_func()
