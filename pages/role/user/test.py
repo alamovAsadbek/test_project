@@ -60,5 +60,9 @@ class Test:
         print("Waiting...")
         result = execute_query(query, params, fetch='one')
         self.__test_id = result['id']
-        for _ in range(number_of_questions):
+        for ques in range(number_of_questions):
             self.question_func()
+            for q_answer in range(number_of_answers):
+                print(f'Question: {ques + 1} / Question answer: {q_answer + 1}')
+                self.question_answer()
+
