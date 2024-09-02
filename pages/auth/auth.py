@@ -41,6 +41,7 @@ class Auth:
 
     @log_decorator
     def create_question_table(self):
+        self.create_test_table()
         query = '''
         CREATE TABLE IF NOT EXISTS questions (
         ID SERIAL PRIMARY KEY,
@@ -53,6 +54,7 @@ class Auth:
 
     @log_decorator
     def create_option_table(self):
+        self.create_question_table()
         query = '''
         CREATE TABLE IF NOT EXISTS options (
         ID SERIAL PRIMARY KEY,
@@ -66,6 +68,7 @@ class Auth:
 
     @log_decorator
     def create_answers_table(self):
+        self.create_test_table()
         query = '''
         CREATE TABLE IF NOT EXISTS answers (
         ID SERIAL PRIMARY KEY,
@@ -81,6 +84,7 @@ class Auth:
 
     @log_decorator
     def create_answer_items_table(self):
+        self.create_answers_table()
         query = '''
         CREATE TABLE IF NOT EXISTS answer_items (
         ID SERIAL PRIMARY KEY,
