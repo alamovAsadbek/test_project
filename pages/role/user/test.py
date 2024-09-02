@@ -74,3 +74,7 @@ class Test:
         print(f"Your test id: {self.__test_id}")
         print("Test created successfully")
         return True
+
+    @log_decorator
+    def show_all_tests(self):
+        pass
