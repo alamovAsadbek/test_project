@@ -8,6 +8,10 @@ from main_files.decorator.decorator_func import log_decorator
 
 
 class Auth:
+    def __init__(self):
+        self.__admin_username = 'admin'
+        self.__admin_password = 'admin'
+
     @log_decorator
     def create_user_table(self):
         query = '''
