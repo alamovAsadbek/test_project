@@ -13,5 +13,9 @@ class Admin:
         return True
 
     @log_decorator
-    def update_user(self):
+    def get_data(self):
         pass
+
+    @log_decorator
+    def update_user(self):
+        user_id: int = int(input("Enter user id to update: "))
