@@ -37,8 +37,7 @@ class Admin:
             return False
         print(f"\nID: {get_data['id']}\nFirst name: {get_data['first_name']}\nLast name: {get_data['last_name']}\n"
               f"Username: {get_data['username']}\n")
-        new_password = hashlib.md5(input("Enter new password: ").strip().encode('utf-8')).hexdigest()
-        print(new_password)
+        new_password = hashlib.sha256(input("Enter new password: ").strip().encode('utf-8')).hexdigest()
         query = '''
         UPDATE users SET password=%s WHERE ID=%s;
         '''
