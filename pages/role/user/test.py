@@ -123,7 +123,7 @@ class Test:
         print(f"\nID: {get_test['id']}\nName: {get_test['name']}\nCreated at: {get_test['created_at']}\n")
         while True:
             print("Do you want to delete this test? (y/n)")
-            check = input("Choose(y/n): ")
+            check = input("Choose (y/n): ")
             if check == 'y':
                 query = '''
                 DELETE FROM tests WHERE id=%s
