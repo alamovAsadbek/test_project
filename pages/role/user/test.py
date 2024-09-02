@@ -17,6 +17,9 @@ class Test:
         RETURNING id
         '''
         params = (question_name,)
+        result = execute_query(query, params, fetch='one')
+        self.__question_id = result[0]
+        return True
 
     @log_decorator
     def create_test(self):
@@ -30,6 +33,7 @@ class Test:
         RETURNING ID
         '''
         params = (self.__active_user['id'], test_name, test_id)
+        print("Waiting...")
         result = execute_query(query, params, fetch='one')
         self.__test_id = result['id']
         for _ in range(number_of_questions):
