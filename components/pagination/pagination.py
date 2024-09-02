@@ -8,10 +8,13 @@ class Pagination:
     def __init__(self, table_name, keys):
         self.table_name = table_name
         self.keys = keys
+        self.user_id = None
 
     @log_decorator
     def __read_table(self):
         query = "SELECT * FROM {}".format(self.table_name)
+        if self.user_id is not None:
+            query += " WHERE user_id = '{}'".format(self.user_id)
         return execute_query(query, fetch='all')
 
     @log_decorator

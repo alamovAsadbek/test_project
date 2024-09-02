@@ -77,4 +77,4 @@ class Test:
 
     @log_decorator
     def show_all_tests(self):
-        pass
+        qu
