@@ -80,6 +80,10 @@ class Auth:
         return True
 
     @log_decorator
+    def create_answer_items_table(self):
+        pass
+
+    @log_decorator
     def login(self):
         username: str = input("Enter your username: ").strip()
         password: str = hashlib.sha256(input("Enter your password: ").strip().encode('utf-8')).hexdigest()
