@@ -1,6 +1,7 @@
 from main_files.decorator.decorator_func import log_decorator
 from pages.auth.auth import Auth
 from pages.role.admin.admin import Admin
+from pages.role.user.test import Test
 
 
 @log_decorator
@@ -95,6 +96,7 @@ def user_menu():
 
 @log_decorator
 def my_test_menu():
+    test = Test()
     text = '''
 1. Create new test
 2. Update test
@@ -107,6 +109,7 @@ def my_test_menu():
         user_input: int = int(input("Choose menu: "))
         if user_input == 1:
             print("\n<-\t Home / My Tests / Create new test\t ->\n")
+            test.create_test()
             pass
         elif user_input == 2:
             print("\n<-\t Home / My Tests / Update test\t ->\n")
@@ -118,10 +121,10 @@ def my_test_menu():
             print("\n<-\t Home / My Tests / Delete test\t ->\n")
             pass
         elif user_input == 5:
-            user_menu()
+            return user_menu()
         else:
             print("Invalid input")
-            my_test_menu()
+        my_test_menu()
     except Exception as e:
         print(f'Error: {e}')
         my_test_menu()
