@@ -16,9 +16,11 @@ class Admin:
     @log_decorator
     def get_data(self, table_name, data_id):
         query = '''
-        SELECT * FROM %s WHERE ID=%s;
-        '''
-        params = (table_name, data_id)
+        SELECT * FROM {} WHERE ID=%s;
+        '''.format(
+            table_name
+        )
+        params = (data_id.__str__(),)
         return execute_query(query, params, fetch='one')
 
     @log_decorator
