@@ -81,7 +81,18 @@ class Auth:
 
     @log_decorator
     def create_answer_items_table(self):
-        pass
+        query = '''
+        CREATE TABLE IF NOT EXISTS answer_items (
+        ID SERIAL PRIMARY KEY,
+        USER_ID BIGINT REFERENCES users(ID) NOT NULL,
+        QUESTION_ID BIGINT REFERENCES questions(ID),
+        IS_TRUE BOOLEAN DEFAULT FALSE,
+        ANSWER_ID BIGINT REFERENCES answers(ID),
+        CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+        '''
+        execute_query(query)
+        return True
 
     @log_decorator
     def login(self):
