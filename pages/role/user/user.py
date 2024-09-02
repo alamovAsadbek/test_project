@@ -20,6 +20,8 @@ class User:
     def update_test(self):
         self.__test.update_test()
         return True
+
     @log_decorator
     def delete_test(self):
-        pass
+        self.__test.delete_test()
+        return True
