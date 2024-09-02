@@ -1,5 +1,6 @@
 from main_files.decorator.decorator_func import log_decorator
 from pages.auth.auth import Auth
+from pages.role.admin.admin import Admin
 
 
 @log_decorator
@@ -46,13 +47,17 @@ def admin_menu():
     '''
     print(text)
     try:
+        admin = Admin()
         admin_input: int = int(input("Choose menu: "))
         if admin_input == 1:
-            pass
+            admin.show_all_users()
         elif admin_input == 2:
             pass
         elif admin_input == 3:
-            auth_menu()
+            return auth_menu()
+        else:
+            print("Invalid input")
+        admin_menu()
     except Exception as e:
         print(f'Error: {e}')
         admin_menu()

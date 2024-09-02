@@ -9,6 +9,7 @@ class Admin:
     @log_decorator
     def show_all_users(self):
         self.__pagination_users.page_tab()
+        return True
 
     @log_decorator
     def update_user(self):

@@ -15,8 +15,9 @@ class Pagination:
 
     @log_decorator
     def page_tab(self, page_number: int = 1, page_size=5):
+        datas = self.read_table()
+        print(datas)
         while True:
-            datas = self.read_table()
             if datas is None:
                 return False
             print(datas[(page_number - 1) * page_size: (page_number - 1) * page_size + page_size])
