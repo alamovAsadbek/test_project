@@ -37,12 +37,12 @@ class Pagination:
                 return True
             elif choice == "1":
                 if page_number == 1:
-                    print("There is no page before that")
+                    print("\nThere is no page before that")
                     continue
                 page_number -= 1
             elif choice == "2":
                 if page_number == math.ceil(len(datas) / page_size):
-                    print("There is no page after that")
+                    print("\nThere is no page after that")
                     continue
                 page_number += 1
             else:
