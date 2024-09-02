@@ -6,5 +6,6 @@
     <file url="file://$PROJECT_DIR$/main_files/database/db_setting.py" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/pages/auth/auth.py" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/pages/role/admin/admin.py" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/pages/role/user/test.py" dialect="GenericSQL" />
   </component>
 </project>
