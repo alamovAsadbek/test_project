@@ -39,7 +39,17 @@ def auth_menu():
 
 @log_decorator
 def admin_menu():
-    pass
+    text = '''
+1. Show all users
+2. Update user
+3. Logout
+    '''
+    print(text)
+    try:
+        pass
+    except Exception as e:
+        print(f'Error: {e}')
+        admin_menu()
 
 
 @log_decorator
