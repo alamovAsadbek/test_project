@@ -17,7 +17,8 @@ class Test:
         answer_name: str = input("Enter the answers to the questions: ")
         while True:
             print("\nIs this the correct answer?")
-            check = input("\n1. Yes\t2. No\t\n")
+            print('\n1. Yes\t2. No\t\n')
+            check = int(input("Choose: "))
             if check == 1:
                 is_true = True
             elif check == 2:
