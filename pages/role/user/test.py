@@ -37,10 +37,10 @@ class Test:
     def question_func(self):
         question_name: str = input("Enter your question: ")
         query = '''
-        INSERT INTO questions (name) VALUES (%s)
+        INSERT INTO questions (name, test_id) VALUES (%s, %s)
         RETURNING id
         '''
-        params = (question_name,)
+        params = (question_name, self.__test_id)
         result = execute_query(query, params, fetch='one')
         self.__question_id = result[0]
         return True
@@ -50,6 +50,9 @@ class Test:
         test_name: str = input("Enter test name: ").strip()
         number_of_questions: int = int(input("Enter number of questions: ").strip())
         number_of_answers: int = int(input("Enter number of answers: ").strip())
+        if number_of_questions < 1 or number_of_answers < 1:
+            print("Numbers must be greater than 1")
+            return False
         test_id = generate_password()
         print(f"Your test id: {test_id}")
         query = '''
@@ -61,8 +64,8 @@ class Test:
         result = execute_query(query, params, fetch='one')
         self.__test_id = result['id']
         for ques in range(number_of_questions):
+            print(f"Question {ques + 1}")
             self.question_func()
             for q_answer in range(number_of_answers):
                 print(f'Question: {ques + 1} / Question answer: {q_answer + 1}')
                 self.question_answer()
-
