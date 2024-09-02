@@ -78,14 +78,17 @@ class Test:
 
     @log_decorator
     def show_all_tests(self):
-        pagination = Pagination(table_name='tests', keys=['name', 'test_id', 'status', 'created_at'],
+        print("Waiting...")
+        pagination = Pagination(table_name='tests', keys=['id', 'name', 'test_id', 'status', 'created_at'],
                                 user_id=self.__active_user['id'])
         pagination.page_tab()
         return True
 
     @log_decorator
     def update_test(self):
-        test_id: int = int(input("Enter test id: "))
+        test_id: int = int(input("Enter test id and enter 0 to exit: "))
+        if test_id == 0:
+            return False
         query = '''
         SELECT * FROM tests WHERE test_id=%s and user_id=%s
         '''
