@@ -18,4 +18,5 @@ class User:
 
     @log_decorator
     def update_test(self):
-        pass
+        self.__test.update_test()
+        return True
