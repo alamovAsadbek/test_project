@@ -53,7 +53,17 @@ class Auth:
 
     @log_decorator
     def create_option_table(self):
-        pass
+        query = '''
+        CREATE TABLE IF NOT EXISTS options (
+        ID SERIAL PRIMARY KEY,
+        QUESTION_ID BIGINT REFERENCES questions(ID),
+        NAME VARCHAR(255) NOT NULL,
+        IS_TRUE BOOLEAN DEFAULT FALSE,
+        )
+        '''
+        execute_query(query)
+        return True
+
 
     @log_decorator
     def login(self):
