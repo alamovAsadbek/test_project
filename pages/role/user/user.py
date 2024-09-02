@@ -13,4 +13,5 @@ class User:
 
     @log_decorator
     def show_all_tests(self):
-        pass
+        self.__test.show_all_tests()
+        return True
