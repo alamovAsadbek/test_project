@@ -23,7 +23,7 @@ class Pagination:
         while True:
             if datas is None:
                 return False
-            print(datas[(page_number - 1) * page_size: (page_number - 1) * page_size + page_size])
+            result_data = datas[(page_number - 1) * page_size: (page_number - 1) * page_size + page_size]
             print(f"""1 <- {page_number}/{math.ceil(len(datas) / page_size)} -> 2""")
             choice = input("Enter: ")
             if choice == "1":
