@@ -52,7 +52,7 @@ def admin_menu():
         if admin_input == 1:
             admin.show_all_users()
         elif admin_input == 2:
-            pass
+            admin.update_user()
         elif admin_input == 3:
             return auth_menu()
         else:
