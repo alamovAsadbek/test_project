@@ -16,7 +16,6 @@ class Pagination:
     @log_decorator
     def page_tab(self, page_number: int = 1, page_size=2):
         datas = self.read_table()
-        print(datas)
         while True:
             if datas is None:
                 return False
@@ -29,7 +28,7 @@ class Pagination:
                     continue
                 page_number -= 1
             elif choice == "2":
-                if page_number == 2:
+                if page_number == math.ceil(len(datas) / page_size):
                     print("There is no page after that")
                     continue
                 page_number += 1
