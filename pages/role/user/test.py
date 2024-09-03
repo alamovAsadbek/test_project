@@ -587,7 +587,7 @@ class Test:
         return True
 
     @log_decorator
-    def get_answer_count(self):
+    def get_answer_count(self, is_true: bool, question_id: int):
         pass
 
     @log_decorator
