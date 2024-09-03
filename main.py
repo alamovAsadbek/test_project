@@ -181,10 +181,10 @@ def statistics_menu():
             print("Waiting...")
             user.statistics_test()
         elif user_input == 2:
-            user_menu()
+            return user_menu()
         else:
             print("Invalid input")
-            statistics_menu()
+        statistics_menu()
     except Exception as e:
         print(f'Error: {e}')
         statistics_menu()
