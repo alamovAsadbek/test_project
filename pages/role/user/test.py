@@ -162,7 +162,10 @@ class Test:
 
     @log_decorator
     def get_test(self, test_id: int):
-        pass
+        query = '''
+                SELECT * FROM tests WHERE TEST_ID=%s and user_id!=%s
+                '''
+        params = (test_id, self.__active_user['id'])
 
     @log_decorator
     def join_test(self):
