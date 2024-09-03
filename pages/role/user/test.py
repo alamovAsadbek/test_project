@@ -1,5 +1,7 @@
 import threading
 
+from colorama import Fore
+
 from components.pagination.pagination import Pagination
 from components.random_password.generate_password import generate_password
 from main_files.database.db_setting import get_active_user, execute_query
@@ -222,5 +224,8 @@ class Test:
                     choose_option: int = int(input("\tChoose an option: "))
                 select_option = result_get['questions'][index]['options'][choose_option - 1]
                 print(select_option['is_true'])
-                print(select_option)
+                if select_option['is_true']:
+                    print(Fore.GREEN + "Your answer is correct")
+                else:
+                    print(Fore.RED + "Your answer is incorrect")
         print("Test started")
