@@ -555,4 +555,7 @@ class Test:
         if results is None:
             print("Test not found")
             return False
-        print(results)
+        for index, test in enumerate(results):
+            print(f"\n№ {index + 1}\nTest name: {test['name']}\nTest ID: {test['test_id']}\n"
+                  f"Correct answers: {test['correct_answers']}\nWrong answers: {test['wrong_answers']}")
+        return True
