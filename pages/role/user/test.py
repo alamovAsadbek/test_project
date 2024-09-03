@@ -63,14 +63,32 @@ class Test:
 
     @log_decorator
     def question_func(self):
+        """
+        Prompts the user to enter a question and inserts it into the database.
+        The ID of the newly inserted question is stored for further use.
+
+        Returns:
+        - bool: True if the question is successfully inserted; False otherwise.
+        """
+
+        # Prompt the user to enter the question text.
         question_name: str = input("Enter your question: ")
+
+        # SQL query to insert the question into the database.
         query = '''
         INSERT INTO questions (name, test_id) VALUES (%s, %s)
         RETURNING id
         '''
+
+        # Parameters for the query: question text and test ID.
         params = (question_name, self.__test_id)
+
+        # Execute the query to insert the question and fetch the new ID.
         result = execute_query(query, params, fetch='one')
+
+        # Store the new question ID for further use.
         self.__question_id = result[0]
+
         return True
 
     @log_decorator
