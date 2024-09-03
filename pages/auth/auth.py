@@ -83,14 +83,22 @@ class Auth:
 
     @log_decorator
     def create_option_table(self):
-        self.create_question_table()
+        """
+        Creates the 'options' table if it doesn't already exist.
+        The table stores options for questions including ID, question ID (foreign key),
+        option text, correctness flag, and creation timestamp. Also ensures the 'questions' table exists.
+
+        Returns:
+        - bool: True if the table is created successfully.
+        """
+        self.create_question_table()  # Ensure the 'questions' table exists
         query = '''
         CREATE TABLE IF NOT EXISTS options (
-        ID SERIAL PRIMARY KEY,
-        QUESTION_ID BIGINT REFERENCES questions(ID) ON DELETE CASCADE NOT NULL,
-        NAME VARCHAR(255) NOT NULL,
-        IS_TRUE BOOLEAN DEFAULT FALSE NOT NULL,
-        CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+            ID SERIAL PRIMARY KEY,
+            QUESTION_ID BIGINT REFERENCES questions(ID) ON DELETE CASCADE NOT NULL,
+            NAME VARCHAR(255) NOT NULL,
+            IS_TRUE BOOLEAN DEFAULT FALSE NOT NULL,
+            CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
         )
         '''
         execute_query(query)
