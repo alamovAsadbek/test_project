@@ -217,15 +217,15 @@ class Test:
             print('\n', question['question_name'])
             for index_opt, option in enumerate(question['options']):
                 print(f'\t{index_opt + 1}: {option["name"]}')
-            while True:
-                choose_option: int = int(input("Choose an option: "))
-                while choose_option not in range(1, len(question['options']) + 1):
-                    print("You have selected the wrong answer. Please select again")
-                    choose_option: int = int(input("\tChoose an option: "))
-                select_option = result_get['questions'][index]['options'][choose_option - 1]
-                print(select_option['is_true'])
-                if select_option['is_true']:
-                    print(Fore.GREEN + "Your answer is correct")
-                else:
-                    print(Fore.RED + "Your answer is incorrect")
+            choose_option: int = int(input("Choose an option: "))
+            while choose_option not in range(1, len(question['options']) + 1):
+                print("You have selected the wrong answer. Please select again")
+                choose_option: int = int(input("\tChoose an option: "))
+            select_option = result_get['questions'][index]['options'][choose_option - 1]
+            print(select_option['is_true'])
+            if select_option['is_true']:
+                print(Fore.GREEN + "Your answer is correct")
+            else:
+                print(Fore.RED + "Your answer is incorrect")
+
         print("Test started")
