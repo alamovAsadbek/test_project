@@ -180,8 +180,6 @@ class Test:
             print("Can't join test")
             return False
         result_get = self.get_test(test_id=test_id)
-
-
         print("The test is being prepared...")
         query = '''
         SELECT * FROM QUESTIONS WHERE TEST_ID=%s
