@@ -16,12 +16,26 @@ class Test:
 
     @log_decorator
     def question_answer(self):
+        """
+        Prompts the user to enter an answer for a question and determines if it is the correct answer.
+        The answer is then inserted into the database.
+
+        Returns:
+        - bool: True if the answer is successfully inserted; False otherwise.
+        """
+
         is_true = False
+
+        # Prompt the user to enter the answer text.
         answer_name: str = input("Enter the answers to the questions: ")
+
+        # Loop to confirm if the entered answer is correct or not.
         while True:
             print("\nIs this the correct answer?")
             print('\n1. Yes\t2. No\t\n')
             check = int(input("Choose: "))
+
+            # Set the flag based on user input.
             if check == 1:
                 is_true = True
             elif check == 2:
@@ -29,13 +43,22 @@ class Test:
             else:
                 print("Wrong input")
                 continue
+
+            # Confirm the answer and break the loop.
             print("The answer is confirmed")
             break
+
+        # SQL query to insert the answer into the database.
         query = '''
         INSERT INTO options (name, question_id, is_true) VALUES (%s, %s, %s)
         '''
+
+        # Parameters for the query: answer text, question ID, and correctness flag.
         params = (answer_name, self.__question_id, is_true)
+
+        # Execute the query in a separate thread to avoid blocking the main thread.
         threading.Thread(target=execute_query, args=(query, params)).start()
+
         return True
 
     @log_decorator
