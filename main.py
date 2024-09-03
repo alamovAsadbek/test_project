@@ -116,7 +116,7 @@ def my_test_menu():
             user.update_test()
         elif user_input == 3:
             print("\n<-\t Home / My Tests / My tests\t ->\n")
-            user.show_all_tests()
+            user.show_my_tests()
         elif user_input == 4:
             print("\n<-\t Home / My Tests / Delete test\t ->\n")
             user.delete_test()
