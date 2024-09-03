@@ -562,4 +562,9 @@ class Test:
 
     @log_decorator
     def view_statistics_on_tests(self):
-        pass
+        query='''
+        SELECT t.name, t.test_id
+        FROM tests t
+        INNER JOIN answers a ON t.id = a.test_id
+        WHERE t.user_id = %s;
+        '''
