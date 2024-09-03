@@ -466,6 +466,7 @@ class Test:
         # Initialize counters for the number of correct and wrong answers
         current_answer = 0
         wrong_answer = 0
+        is_true = True
 
         # Initialize Colorama to automatically reset text color after each print statement
         init(autoreset=True)
@@ -520,13 +521,14 @@ class Test:
             else:
                 print(Fore.RED + "Your answer is incorrect")
                 wrong_answer += 1
+                is_true = False
 
             # Insert the answer record into the answer_items table
             query = '''
             INSERT INTO answer_items (user_id, question_id, is_true, answer_id) VALUES (%s, %s, %s, %s)
             '''
             params = (
-                str(self.__active_user['id']), question['question_id'].__str__(), True, get_answer_id)
+                str(self.__active_user['id']), question['question_id'].__str__(), is_true, get_answer_id)
             threading.Thread(target=execute_query, args=(query, params)).start()
 
         # Print summary of the test results
