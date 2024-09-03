@@ -33,4 +33,5 @@ class User:
 
     @log_decorator
     def join_test(self):
-        pass
+        self.__test.join_test()
+        return True
