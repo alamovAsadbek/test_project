@@ -559,3 +559,7 @@ class Test:
             print(f"\n№ {index + 1}\nTest name: {test['name']}\nTest ID: {test['test_id']}\n"
                   f"Correct answers: {test['correct_answers']}\nWrong answers: {test['wrong_answers']}\n")
         return True
+
+    @log_decorator
+    def view_statistics_on_tests(self):
+        pass
