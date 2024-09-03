@@ -618,4 +618,4 @@ class Test:
                     print(Fore.GREEN + f'\t\t{index_opt + 1}: {option["name"]}')
                 else:
                     print(f'\t\t{index_opt + 1}: {option["name"]}')
-            print(f"\nCorrect answers: {result_true[0]}\tWrong answers: {result_false[0]}\n")
+            print(f"\nCorrect answers: {result_true[0]},\tWrong answers: {result_false[0]}\n")
