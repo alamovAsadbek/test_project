@@ -164,41 +164,96 @@ class Test:
 
     @log_decorator
     def get_test(self, test_id: int):
+        """
+        Retrieves details of a specific test, including its questions and options,
+        from the database. Returns a dictionary with test details and questions.
+
+        Parameters:
+        - test_id (int): The ID of the test to retrieve.
+
+        Returns:
+        - dict: A dictionary containing test details, including questions and options.
+        """
+
+        # Initialize an empty dictionary to hold the test details and questions.
         all_tests: dict = dict()
+
+        # SQL query to select test details where TEST_ID matches and the test is not created by the active user.
         query = '''
-                SELECT * FROM tests WHERE TEST_ID=%s and user_id!=%s
-                '''
+        SELECT * FROM tests WHERE TEST_ID=%s and user_id!=%s
+        '''
+
+        # Parameters for the SQL query.
         params = (test_id, self.__active_user['id'])
+
+        # Execute the query to retrieve the test details.
         get_test = execute_query(query, params, fetch='one')
+
+        # If no test is found, print a message and return False.
         if get_test is None:
             print("Test not found")
             return False
+
+        # Print the retrieved test details.
         print(f'\nTEST ID: {get_test["test_id"]}\nTest Name: {get_test["name"]}\n')
-        all_tests.update({'test_id': get_test["id"], 'joined_id': get_test["test_id"], 'test_name': get_test["name"],
-                          'questions': []})
+
+        # Update the all_tests dictionary with test details and an empty list for questions.
+        all_tests.update({
+            'test_id': get_test["id"],
+            'joined_id': get_test["test_id"],
+            'test_name': get_test["name"],
+            'questions': []
+        })
+
+        # Notify that the test is being prepared.
         print("The test is being prepared...")
+
+        # SQL query to retrieve all questions for the given test ID.
         query = '''
-                SELECT id, name FROM QUESTIONS WHERE TEST_ID=%s
-                '''
+        SELECT id, name FROM QUESTIONS WHERE TEST_ID=%s
+        '''
+
+        # Parameters for the SQL query to fetch questions.
         params = (get_test['id'],)
+
+        # Execute the query to retrieve the questions.
         questions = execute_query(query, params, fetch='all')
+
+        # If no questions are found, print a message and return False.
         if questions is None:
             print("No test questions found")
             return False
+
+        # Iterate over each question and retrieve its options.
         for index, question in enumerate(questions):
+            # Prepare a dictionary for each question.
             data = {
                 'question_id': question['id'],
                 'question_name': question['name'],
             }
+
+            # SQL query to retrieve options for a specific question ID.
             query = '''
             SELECT id, name, is_true FROM OPTIONS WHERE QUESTION_ID=%s
             '''
+
+            # Parameters for the SQL query to fetch options.
             params = (question['id'],)
+
+            # Execute the query to retrieve the options.
             options = execute_query(query, params, fetch='all')
+
+            # If no options are found, set options to an empty list.
             if options is None:
                 options = []
+
+            # Add options to the question data.
             data['options'] = options
+
+            # Append the question data to the all_tests dictionary.
             all_tests['questions'].append(data)
+
+        # Return the dictionary containing test details and questions.
         return all_tests
 
     @log_decorator
