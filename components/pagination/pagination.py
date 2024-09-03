@@ -10,8 +10,7 @@ class Pagination:
         self.table_keys = table_keys
         self.user_id = user_id
         self.data = data
-        if display_keys is None:
-            self.display_keys = table_keys
+        self.display_keys = display_keys
 
     @log_decorator
     def __read_table(self):
