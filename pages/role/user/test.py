@@ -189,7 +189,7 @@ class Test:
                 'question_name': question['name'],
             }
             query = '''
-            SELECT name, is_true FROM OPTIONS WHERE QUESTION_ID=%s
+            SELECT id, name, is_true FROM OPTIONS WHERE QUESTION_ID=%s
             '''
             params = (question['id'],)
             options = execute_query(query, params, fetch='all')
@@ -220,5 +220,6 @@ class Test:
                 while choose_option not in range(1, len(question['options']) + 1):
                     print("You have selected the wrong answer. Please select again")
                     choose_option: int = int(input("Choose an option: "))
-
+                select_option = result_get['options'][choose_option - 1]
+                print(select_option)
         print("Test started")
