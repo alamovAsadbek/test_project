@@ -171,6 +171,15 @@ class Test:
             print("Test not found")
             return False
         print(f'\nTEST ID: {get_test["test_id"]}\nTest Name: {get_test["name"]}\n')
+        query = '''
+                SELECT * FROM QUESTIONS WHERE TEST_ID=%s
+                '''
+        params = (get_test['id'],)
+        questions = execute_query(query, params, fetch='all')
+        if questions is None:
+            print("No test questions found")
+            return False
+        print(questions)
 
     @log_decorator
     def join_test(self):
@@ -179,22 +188,13 @@ class Test:
         if test_id == 0:
             print("Can't join test")
             return False
-        result_get = self.get_test(test_id=test_id)
         print("The test is being prepared...")
-        query = '''
-        SELECT * FROM QUESTIONS WHERE TEST_ID=%s
-        '''
-        params = (test_id,)
-        questions = execute_query(query, params, fetch='all')
-        if questions is None:
-            print("No test questions found")
-            return False
-        print(questions)
-        for question in questions:
-            query = '''
-            SELECT * FROM OPTIONS WHERE QUESTION_ID=%s
-            '''
-            params = (question["id"],)
-            options.append(execute_query(query, params, fetch='all'))
-        print(options)
+        result_get = self.get_test(test_id=test_id)
+        # for question in questions:
+        #     query = '''
+        #     SELECT * FROM OPTIONS WHERE QUESTION_ID=%s
+        #     '''
+        #     params = (question["id"],)
+        #     options.append(execute_query(query, params, fetch='all'))
+        # print(options)
         print("Test started")
