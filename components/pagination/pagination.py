@@ -5,7 +5,7 @@ from main_files.decorator.decorator_func import log_decorator
 
 
 class Pagination:
-    def __init__(self, table_name, table_keys, display_keys=None, user_id=None, data=None):
+    def __init__(self, table_name, table_keys, display_keys, user_id=None, data=None):
         self.table_name = table_name
         self.table_keys = table_keys
         self.user_id = user_id
