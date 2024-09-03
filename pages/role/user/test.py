@@ -202,6 +202,10 @@ class Test:
         return all_tests
 
     @log_decorator
+    def insert_answer_table(self):
+        pass
+
+    @log_decorator
     def join_test(self):
         current_answer = 0
         wrong_answer = 0
