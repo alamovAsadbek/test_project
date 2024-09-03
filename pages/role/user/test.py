@@ -150,6 +150,6 @@ class Test:
         if result_get is None:
             print("Test not found")
             return False
-        print(result_get)
         pagination = Pagination(table_name='tests', keys=['name', 'test_id', 'status', 'created_at'], data=result_get)
         pagination.page_tab()
+        return True
