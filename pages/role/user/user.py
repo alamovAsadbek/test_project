@@ -40,3 +40,7 @@ class User:
     def my_result(self):
         self.__test.my_results()
         return True
+
+    @log_decorator
+    def statistics_test(self):
+        pass
