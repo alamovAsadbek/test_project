@@ -587,6 +587,10 @@ class Test:
         return True
 
     @log_decorator
+    def get_answer_count(self):
+        pass
+
+    @log_decorator
     def view_statistics_on_questions(self):
         init(autoreset=True)
         test_id: int = int(input("Enter a test ID or enter 0 to exit: ").strip())
