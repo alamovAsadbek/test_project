@@ -596,8 +596,9 @@ class Test:
         if result_get is False:
             return False
         for index, test in enumerate(result_get['questions']):
-            print(f"Question {index + 1}\n")
+            print(f"Question {index + 1}: {test['question_name']}\n")
             for index_opt, option in enumerate(test['options']):
                 if option['is_true']:
                     print(Fore.GREEN + f'\t\t{index_opt + 1}: {option["name"]}')
-                print(f'\t{index_opt + 1}: {option["name"]}')
+                    continue
+                print(f'\t\t{index_opt + 1}: {option["name"]}')
