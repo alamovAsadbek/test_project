@@ -156,25 +156,43 @@ class Auth:
 
     @log_decorator
     def login(self):
+        """
+        Authenticates a user and sets their login status to true.
+        If the provided username and password match an admin, returns admin role.
+        Otherwise, checks the users table for valid credentials and updates login status.
+
+        Returns:
+        - dict: Authentication status and user role.
+        """
         username: str = input("Enter your username: ").strip()
         password: str = hashlib.sha256(input("Enter your password: ").strip().encode('utf-8')).hexdigest()
+
+        # Check if the credentials match the admin credentials.
         if (username == self.__admin_username and
                 password == hashlib.sha256(self.__admin_password.encode('utf-8')).hexdigest()):
             return {'is_login': True, 'role': "admin"}
+
         print("Checked...")
+
+        # Query to check the user credentials.
         query = '''
         SELECT * FROM users WHERE USERNAME = %s AND PASSWORD = %s
         '''
         params = (username, password,)
         result_get = execute_query(query, params, fetch='one')
+
+        # If no user found with the given credentials, return an error message.
         if result_get is None:
             print("Invalid username or password!")
             return {'is_login': False}
+
+        # Update the user's login status to true.
         query = '''
         UPDATE users SET IS_LOGIN = TRUE WHERE ID=%s;
         '''
         params = (result_get['id'],)
         threading.Thread(target=execute_query, args=(query, params)).start()
+
         print("Login successful!")
         return {'is_login': True, 'role': "user"}
 
