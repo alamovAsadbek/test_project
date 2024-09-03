@@ -213,5 +213,6 @@ class Test:
         for index, question in enumerate(result_get['questions']):
             print(f"Question {index + 1}")
             print('\n', question['question_name'])
-
+            for index, option in enumerate(question['options']):
+                pass
         print("Test started")
