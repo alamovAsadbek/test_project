@@ -286,7 +286,7 @@ class Test:
 
         # Update the answers table with the final count of correct and wrong answers
         query = '''
-        UPDATE ANSWERS SET CORRECT_ANSWERS=%s AND WRONG_ANSWERS=%s WHERE id=%s
+        UPDATE ANSWERS SET CORRECT_ANSWERS=%s, WRONG_ANSWERS=%s WHERE id=%s
         '''
         params = (current_answer, wrong_answer, get_answer_id)
         threading.Thread(target=execute_query, args=(query, params)).start()
