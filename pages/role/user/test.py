@@ -147,7 +147,7 @@ class Test:
         SELECT t.test_id, t.name, t.test_id, u.first_name, u.last_name
         FROM tests t
         INNER JOIN users u ON t.user_id = u.id
-        WHERE t.user_id = %s;
+        WHERE t.user_id != %s;
         '''
         params = (str(self.__active_user['id']),)
         result_get = execute_query(query, params, fetch='all')
