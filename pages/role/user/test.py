@@ -144,22 +144,48 @@ class Test:
 
     @log_decorator
     def show_all_tests(self):
+        """
+        Retrieves and displays all tests that are not created by the active user,
+        along with the names of their creators. Uses pagination to display the results.
+
+        Returns:
+        - bool: True if tests are found and displayed successfully; False otherwise.
+        """
+
+        # Notify the user that the operation is in progress.
         print("Waiting...")
+
+        # SQL query to select tests created by users other than the active user.
         query = '''
         SELECT t.test_id, t.name, t.test_id, u.first_name, u.last_name
         FROM tests t
         INNER JOIN users u ON t.user_id = u.id
         WHERE t.user_id != %s;
         '''
+
+        # Parameters for the SQL query to exclude tests created by the active user.
         params = (str(self.__active_user['id']),)
+
+        # Execute the query to fetch all relevant tests.
         result_get = execute_query(query, params, fetch='all')
+
+        # Check if the query returned any results.
         if result_get is None:
             print("Test not found")
             return False
-        pagination = Pagination(table_name='tests', table_keys=['name', 'test_id', 'first_name', 'last_name'],
-                                display_keys=["Test name", "Test id", "Owner first name", "Owner last name"],
-                                data=result_get)
+
+        # Initialize pagination for displaying the results.
+        pagination = Pagination(
+            table_name='tests',
+            table_keys=['name', 'test_id', 'first_name', 'last_name'],
+            display_keys=["Test name", "Test id", "Owner first name", "Owner last name"],
+            data=result_get
+        )
+
+        # Display the paginated results.
         pagination.page_tab()
+
+        # Indicate that the operation was successful.
         return True
 
     @log_decorator
