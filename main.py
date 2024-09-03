@@ -178,7 +178,7 @@ def statistics_menu():
         user_input: int = int(input("Choose menu: "))
         if user_input == 1:
             print("\n<-\t Home / Statistics / View statistics on tests\t ->\n")
-            pass
+            user.statistics_test()
         elif user_input == 2:
             user_menu()
         else:
