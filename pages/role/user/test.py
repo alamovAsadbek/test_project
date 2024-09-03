@@ -613,6 +613,6 @@ class Test:
             for index_opt, option in enumerate(test['options']):
                 if option['is_true']:
                     print(Fore.GREEN + f'\t\t{index_opt + 1}: {option["name"]}')
-                    continue
-                print(f'\t\t{index_opt + 1}: {option["name"]}')
+                else:
+                    print(f'\t\t{index_opt + 1}: {option["name"]}')
             print(f"\nCorrect answers: {result_true[0]}\tWrong answers: {result_false[0]}\n")
