@@ -131,15 +131,24 @@ class Auth:
 
     @log_decorator
     def create_answer_items_table(self):
-        self.create_answers_table()
+        """
+        Creates the 'answer_items' table if it doesn't already exist.
+        The table stores detailed answer records including ID, user ID (foreign key),
+        question ID (foreign key), correctness flag, answer ID (foreign key), and creation timestamp.
+        Also ensures the 'answers' table exists.
+
+        Returns:
+        - bool: True if the table is created successfully.
+        """
+        self.create_answers_table()  # Ensure the 'answers' table exists
         query = '''
         CREATE TABLE IF NOT EXISTS answer_items (
-        ID SERIAL PRIMARY KEY,
-        USER_ID BIGINT REFERENCES users(ID) ON DELETE CASCADE NOT NULL ,
-        QUESTION_ID BIGINT REFERENCES questions(ID) ON DELETE CASCADE NOT NULL ,
-        IS_TRUE BOOLEAN DEFAULT FALSE NOT NULL,
-        ANSWER_ID BIGINT REFERENCES answers(ID) ON DELETE CASCADE NOT NULL,
-        CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            ID SERIAL PRIMARY KEY,
+            USER_ID BIGINT REFERENCES users(ID) ON DELETE CASCADE NOT NULL,
+            QUESTION_ID BIGINT REFERENCES questions(ID) ON DELETE CASCADE NOT NULL,
+            IS_TRUE BOOLEAN DEFAULT FALSE NOT NULL,
+            ANSWER_ID BIGINT REFERENCES answers(ID) ON DELETE CASCADE NOT NULL,
+            CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
         '''
         execute_query(query)
