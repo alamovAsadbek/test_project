@@ -143,14 +143,18 @@ class Test:
     def show_all_tests(self):
         print("Waiting...")
         query = '''
-        SELECT * FROM tests WHERE user_id != %s
+        SELECT t.test_id, t.name, t.test_id, u.first_name, u.last_name
+        FROM tests t
+        INNER JOIN users u ON t.user_id = u.id
+        WHERE t.user_id = %s;
         '''
         params = (str(self.__active_user['id']),)
         result_get = execute_query(query, params, fetch='all')
         if result_get is None:
             print("Test not found")
             return False
-        pagination = Pagination(table_name='tests', keys=['name', 'test_id', 'status', 'created_at'], data=result_get)
+        pagination = Pagination(table_name='tests', keys=['name', 'test_id', 'first_name', 'last_name'],
+                                data=result_get)
         pagination.page_tab()
         return True
 
