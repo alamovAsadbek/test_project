@@ -244,12 +244,23 @@ class Auth:
 
     @log_decorator
     def logout(self):
+        """
+        Logs out all users by setting their IS_LOGIN status to false.
+        Also ensures that all relevant tables exist.
+
+        Returns:
+        - bool: True if the logout process is successful.
+        """
+        # Ensure that all tables are created.
         self.create_user_table()
         threading.Thread(target=self.create_test_table).start()
         threading.Thread(target=self.create_question_table).start()
         threading.Thread(target=self.create_option_table).start()
         threading.Thread(target=self.create_answers_table).start()
         threading.Thread(target=self.create_answer_items_table).start()
+
+        # Update all users' login status to false.
         query = '''UPDATE users SET IS_LOGIN=FALSE;'''
         execute_query(query)
+
         return True
