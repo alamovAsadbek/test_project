@@ -541,3 +541,7 @@ class Test:
         # Inform the user that the test is over
         print("\nThe test is over\n")
         return True
+
+    @log_decorator
+    def my_results(self):
+        pass
