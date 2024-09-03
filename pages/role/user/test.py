@@ -208,7 +208,7 @@ class Test:
         RETURNING id;
         '''
         params = (str(self.__active_user['id']), test_id, 0, 0)
-        result = execute_query(query, params)
+        result = execute_query(query, params, fetch='one')
         return result['id']
 
     @log_decorator
@@ -222,7 +222,7 @@ class Test:
             return False
         print("Test searching...")
         result_get = self.get_test(test_id=test_id)
-        get_answer_id = threading.Thread(target=self.insert_answer_table, args=(result_get['test_id'],)).start()
+        get_answer_id = self.insert_answer_table(test_id=result_get["test_id"])
         print(get_answer_id)
         if result_get is False:
             print("Something went wrong")
