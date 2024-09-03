@@ -213,48 +213,84 @@ class Test:
 
     @log_decorator
     def join_test(self):
+        # Initialize counters for the number of correct and wrong answers
         current_answer = 0
         wrong_answer = 0
+
+        # Initialize Colorama to automatically reset text color after each print statement
         init(autoreset=True)
+
+        # Get the test ID from user input
         test_id = int(input("Enter test id and enter 0 to exit: ").strip())
+
+        # If user enters 0, exit the method
         if test_id == 0:
             print("Can't join test")
             return False
+
+        # Indicate that the test is being searched for
         print("Test searching...")
+
+        # Fetch test details using the provided test ID
         result_get = self.get_test(test_id=test_id)
+
+        # Insert a new record into the answers table for the user and get the answer ID
         get_answer_id = self.insert_answer_table(test_id=result_get["test_id"])
+
+        # If fetching the test details failed, inform the user and exit the method
         if result_get is False:
             print("Something went wrong")
             return False
+
+        # Loop through each question in the fetched test
         for index, question in enumerate(result_get['questions']):
+            # Display the question
             print(f"Question {index + 1}")
             print('\n', question['question_name'])
+
+            # Display the options for the current question
             for index_opt, option in enumerate(question['options']):
                 print(f'\t{index_opt + 1}: {option["name"]}')
+
+            # Get the user's choice of option
             choose_option: int = int(input("Choose an option: "))
+
+            # Validate the user's choice; it must be within the valid range of options
             while choose_option not in range(1, len(question['options']) + 1):
                 print(Fore.RED + "You have selected the wrong answer. Please select again")
                 choose_option: int = int(input(Fore.BLUE + "\tChoose an option: "))
+
+            # Get the selected option based on the user's choice
             select_option = result_get['questions'][index]['options'][choose_option - 1]
+
+            # Check if the selected option is correct or not
             if select_option['is_true']:
                 print(Fore.GREEN + "Your answer is correct")
                 current_answer += 1
             else:
                 print(Fore.RED + "Your answer is incorrect")
                 wrong_answer += 1
+
+            # Insert the answer record into the answer_items table
             query = '''
             INSERT INTO answer_items (user_id, question_id, is_true, answer_id) VALUES (%s, %s, %s, %s)
             '''
             params = (
                 str(self.__active_user['id']), question['question_id'].__str__(), True, get_answer_id)
             threading.Thread(target=execute_query, args=(query, params)).start()
+
+        # Print summary of the test results
         print(f"\nNumber of questions: {len(result_get['questions'])}\n"
               f"Current answer: {current_answer}\n"
               f"Wrong answer: {wrong_answer}")
+
+        # Update the answers table with the final count of correct and wrong answers
         query = '''
         UPDATE ANSWERS SET CORRECT_ANSWERS=%s AND WRONG_ANSWERS=%s WHERE id=%s
         '''
         params = (current_answer, wrong_answer, get_answer_id)
         threading.Thread(target=execute_query, args=(query, params)).start()
+
+        # Inform the user that the test is over
         print("\nThe test is over\n")
         return True
