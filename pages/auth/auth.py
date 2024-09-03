@@ -61,13 +61,21 @@ class Auth:
 
     @log_decorator
     def create_question_table(self):
-        self.create_test_table()
+        """
+        Creates the 'questions' table if it doesn't already exist.
+        The table stores question information including ID, test ID (foreign key),
+        question text, and creation timestamp. Also ensures that the 'tests' table exists.
+
+        Returns:
+        - bool: True if the table is created successfully.
+        """
+        self.create_test_table()  # Ensure the 'tests' table exists
         query = '''
         CREATE TABLE IF NOT EXISTS questions (
-        ID SERIAL PRIMARY KEY,
-        TEST_ID BIGINT REFERENCES tests(ID) ON DELETE CASCADE NOT NULL,
-        NAME VARCHAR(255) NOT NULL,
-        CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+            ID SERIAL PRIMARY KEY,
+            TEST_ID BIGINT REFERENCES tests(ID) ON DELETE CASCADE NOT NULL,
+            NAME VARCHAR(255) NOT NULL,
+            CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
         )
         '''
         execute_query(query)
