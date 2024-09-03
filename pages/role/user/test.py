@@ -582,3 +582,7 @@ class Test:
                                               'Test ID', 'Correct answers', 'Wrong answers'])
         pagination.page_tab()
         return True
+
+    @log_decorator
+    def view_statistics_on_questions(self):
+        pass
