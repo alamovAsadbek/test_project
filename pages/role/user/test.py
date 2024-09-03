@@ -563,10 +563,12 @@ class Test:
     @log_decorator
     def view_statistics_on_tests(self):
         query = '''
-        SELECT u.first_name, a.correct_answers, a.wrong_answers, t.name, t.test_id
-        FROM answers a
-        INNER JOIN tests t ON a.test_id = t.id
-        INNER JOIN users u ON t.user_id = 4
+        SELECT usr.first_name, usr.last_name, usr.username, t.name, t.test_id, a.correct_answers, a.wrong_answers, 
+        FROM USERS u
+        INNER JOIN TESTS t ON u.id = t.user_id
+        INNER JOIN ANSWERS a ON t.id = a.test_id
+        INNER JOIN users usr ON a.user_id = usr.id
+        where u.id = 4;
         '''
         params = (str(self.__active_user['id']),)
         result_get = execute_query(query, params, fetch='all')
