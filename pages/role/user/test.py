@@ -112,32 +112,67 @@ class Test:
 
     @log_decorator
     def delete_test(self):
+        """
+        Allows the active user to delete a test by providing its ID.
+        The user is prompted to confirm the deletion before proceeding.
+
+        Returns:
+        - bool: True if the test is successfully deleted or the operation is canceled; False otherwise.
+        """
+
+        # Prompt the user to enter the test ID they wish to delete. Entering 0 will cancel the operation.
         test_id: int = int(input("Enter test id and enter 0 to exit: "))
+
+        # If the user enters 0, cancel the operation and return False.
         if test_id == 0:
             return False
+
+        # SQL query to select the test to be deleted, ensuring it belongs to the active user.
         query = '''
-                SELECT * FROM tests WHERE id=%s and user_id=%s
-                '''
+        SELECT * FROM tests WHERE id=%s AND user_id=%s
+        '''
+
+        # Parameters for the query: test ID and the active user's ID.
         params = (test_id, self.__active_user['id'])
+
+        # Execute the query to fetch the test details.
         get_test = execute_query(query, params, fetch='one')
+
+        # Check if the test was found. If not, notify the user and return False.
         if get_test is None:
             print("Test not found")
             return False
+
+        # Display the details of the test to the user for confirmation.
         print(f"\nID: {get_test['id']}\nName: {get_test['name']}\nCreated at: {get_test['created_at']}\n")
+
+        # Prompt the user to confirm if they really want to delete the test.
         while True:
             print("Do you want to delete this test? (y/n)")
             check = input("Choose (y/n): ")
+
+            # If the user confirms (enters 'y'), proceed with deletion.
             if check == 'y':
+                # SQL query to delete the test based on its ID.
                 query = '''
                 DELETE FROM tests WHERE id=%s
                 '''
+                # Parameters for the deletion query: test ID.
                 params = (test_id,)
+
+                # Execute the deletion query in a separate thread to avoid blocking the main thread.
                 threading.Thread(target=execute_query, args=(query, params)).start()
+
+                # Notify the user that the test was deleted successfully and return True.
                 print("Test deleted successfully")
                 return True
+
+            # If the user cancels (enters 'n'), print a cancel message and return True.
             elif check == 'n':
                 print("Cancel")
                 return True
+
+            # If the input is invalid, prompt the user to enter 'y' or 'n' again.
             else:
                 print("Wrong input")
                 continue
