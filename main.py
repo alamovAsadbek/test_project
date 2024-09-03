@@ -136,7 +136,7 @@ def tests_menu():
     user = User()
     text = '''
 1. Join test
-2. Show all test
+2. Show all tests
 3. My results
 4. Back
     '''
@@ -147,7 +147,7 @@ def tests_menu():
             print("\n<-\t Home / Tests / Join test\t ->\n")
             pass
         elif user_input == 2:
-            print("\n<-\t Home / Tests / Show all test\t ->\n")
+            print("\n<-\t Home / Tests / Show all tests\t ->\n")
             user.show_all_tests()
         elif user_input == 3:
             print("\n<-\t Home / Tests / My tests\t ->\n")
