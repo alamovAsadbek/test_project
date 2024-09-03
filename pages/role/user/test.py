@@ -572,4 +572,13 @@ class Test:
         '''
         params = (str(self.__active_user['id']),)
         result_get = execute_query(query, params, fetch='all')
-        print(result_get)
+        if result_get is None:
+            print("Test not found")
+            return False
+        pagination = Pagination(table_name='users', data=result_get,
+                                table_keys=['first_name', 'last_name', 'username', 'name',
+                                            'test_id', 'correct_answers', 'wrong_answers'],
+                                display_keys=['First name', 'Last name', 'Username', 'Test name',
+                                              'Test ID', 'Correct answers', 'Wrong answers'])
+        pagination.page_tab()
+        return True
