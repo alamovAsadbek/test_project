@@ -145,11 +145,23 @@ class Test:
 
     @log_decorator
     def show_my_tests(self):
+        """
+        Displays a paginated list of tests created by the active user.
+
+        Returns:
+        - bool: True if the list of tests is successfully displayed; False otherwise.
+        """
+
         print("Waiting...")
+
+        # Initialize pagination for displaying tests.
         pagination = Pagination(table_name='tests', table_keys=['id', 'name', 'test_id', 'status', 'created_at'],
                                 display_keys=["ID", "Name", "Test id", "Status", "Created"],
                                 user_id=self.__active_user['id'])
+
+        # Display the paginated list of tests.
         pagination.page_tab()
+
         return True
 
     @log_decorator
