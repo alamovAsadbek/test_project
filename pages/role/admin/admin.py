@@ -9,7 +9,8 @@ from main_files.decorator.decorator_func import log_decorator
 class Admin:
     def __init__(self):
         self.__pagination_users = Pagination('users',
-                                             ['id', 'first_name', 'last_name', 'username', 'created'])
+                                             ['id', 'first_name', 'last_name', 'username', 'created'],
+                                             ['ID', 'FirstName', 'LastName', 'Username', 'Created'])
 
     @log_decorator
     def show_all_users(self):
