@@ -588,7 +588,7 @@ class Test:
 
     @log_decorator
     def view_statistics_on_questions(self):
-
+        init(autoreset=True)
         test_id: int = int(input("Enter a test ID or enter 0 to exit: ").strip())
         if test_id == 0:
             return False
