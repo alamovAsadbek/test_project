@@ -30,3 +30,7 @@ class User:
     def show_all_tests(self):
         self.__test.show_all_tests()
         return True
+
+    @log_decorator
+    def join_test(self):
+        pass
