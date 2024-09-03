@@ -166,12 +166,15 @@ def tests_menu():
 
 @log_decorator
 def statistics_menu():
+    print("Waiting...")
+    user = User()
     text = '''
 1. View statistics on tests
 2. Back
     '''
     print(text)
     try:
+
         user_input: int = int(input("Choose menu: "))
         if user_input == 1:
             print("\n<-\t Home / Statistics / View statistics on tests\t ->\n")
