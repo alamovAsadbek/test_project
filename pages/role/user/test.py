@@ -518,6 +518,7 @@ class Test:
             if select_option['is_true']:
                 print(Fore.GREEN + "Your answer is correct")
                 current_answer += 1
+                is_true = True
             else:
                 print(Fore.RED + "Your answer is incorrect")
                 wrong_answer += 1
