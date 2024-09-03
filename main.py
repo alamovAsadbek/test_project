@@ -147,7 +147,7 @@ def tests_menu():
         user_input: int = int(input("Choose menu: "))
         if user_input == 1:
             print("\n<-\t Home / Tests / Join test\t ->\n")
-            pass
+            user.join_test()
         elif user_input == 2:
             print("\n<-\t Home / Tests / Show all tests\t ->\n")
             user.show_all_tests()
