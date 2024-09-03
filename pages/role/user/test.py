@@ -141,4 +141,4 @@ class Test:
 
     @log_decorator
     def show_all_tests(self):
-        pass
+        pagination = Pagination(table_name='tests', keys=['name', 'test_id', 'status', 'created_at'])
