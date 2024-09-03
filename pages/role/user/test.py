@@ -138,3 +138,7 @@ class Test:
             else:
                 print("Wrong input")
                 continue
+
+    @log_decorator
+    def show_all_tests(self):
+        pass
