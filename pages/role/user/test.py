@@ -594,7 +594,7 @@ class Test:
         WHERE question_id = %s AND is_true = %s;
         '''
         params = (question_id, is_true)
-        results = execute_query(query, params, fetch='all')
+        results = execute_query(query, params, fetch='one')
         return results
 
     @log_decorator
@@ -609,10 +609,10 @@ class Test:
         for index, test in enumerate(result_get['questions']):
             result_true = self.get_answer_count(question_id=test['question_id'], is_true=True)
             result_false = self.get_answer_count(question_id=test['question_id'], is_true=False)
-            print(result_true, result_false)
             print(f"Question {index + 1}: {test['question_name']}")
             for index_opt, option in enumerate(test['options']):
                 if option['is_true']:
                     print(Fore.GREEN + f'\t\t{index_opt + 1}: {option["name"]}')
                     continue
                 print(f'\t\t{index_opt + 1}: {option["name"]}')
+                print(f"\nCorrect answers: {result_true[0]}\tWrong answers: {result_false[0]}\n")
