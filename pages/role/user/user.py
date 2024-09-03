@@ -35,3 +35,7 @@ class User:
     def join_test(self):
         self.__test.join_test()
         return True
+
+    @log_decorator
+    def my_result(self):
+        pass
