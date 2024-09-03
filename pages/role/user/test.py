@@ -162,6 +162,7 @@ class Test:
 
     @log_decorator
     def get_test(self, test_id: int):
+        all_tests: dict = dict()
         query = '''
                 SELECT * FROM tests WHERE TEST_ID=%s and user_id!=%s
                 '''
@@ -171,6 +172,7 @@ class Test:
             print("Test not found")
             return False
         print(f'\nTEST ID: {get_test["test_id"]}\nTest Name: {get_test["name"]}\n')
+        all_tests.update({'test_id': get_test["id"], 'joined_id': get_test["test_id"], 'test_name': get_test["name"]})
         print("The test is being prepared...")
         query = '''
                 SELECT id, name FROM QUESTIONS WHERE TEST_ID=%s
@@ -180,11 +182,23 @@ class Test:
         if questions is None:
             print("No test questions found")
             return False
-        print(questions)
+        for question in questions:
+            data = {
+                'question_id': question['id'],
+                'question_name': question['name'],
+            }
+            query = '''
+            SELECT * FROM OPTIONS WHERE QUESTION_ID=%s
+            '''
+            params = (question['id'],)
+            options = execute_query(query, params, fetch='all')
+            if options is None:
+                options = []
+            data['options'] = options
+            print(data)
 
     @log_decorator
     def join_test(self):
-        options = []
         test_id = int(input("Enter test id and enter 0 to exit: ").strip())
         if test_id == 0:
             print("Can't join test")
