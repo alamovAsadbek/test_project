@@ -245,9 +245,11 @@ class Test:
             query = '''
             INSERT INTO answer_items (user_id, question_id, is_true, answer_id) VALUES (%s, %s, %s, %s)
             '''
-            params = (str(self.__active_user['id']), question['question_id'], get_answer_id, True, get_answer_id)
+            params = (
+                str(self.__active_user['id']), question['question_id'].__str__(), True, get_answer_id)
             threading.Thread(target=execute_query, args=(query, params)).start()
         print(f"\nNumber of questions: {len(result_get['questions'])}\n"
               f"Current answer: {current_answer}\n"
               f"Wrong answer: {wrong_answer}")
+        print("\nThe test is over\n")
         return True
