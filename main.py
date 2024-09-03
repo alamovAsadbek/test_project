@@ -183,6 +183,8 @@ def statistics_menu():
             user.statistics_test()
         elif user_input == 2:
             print("\n<-\t Home / Statistics / VView statistics on test questions\t ->\n")
+            print('Waiting....')
+            user.statistics_test_questions()
         elif user_input == 3:
             return user_menu()
         else:
