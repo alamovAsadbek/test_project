@@ -202,8 +202,14 @@ class Test:
         return all_tests
 
     @log_decorator
-    def insert_answer_table(self):
-        pass
+    def insert_answer_table(self, test_id):
+        query = '''
+        INSERT INTO answers (user_id, test_id, CORRECT_ANSWERS, WRONG_ANSWERS) VALUES (%s, %s, %s, %s)
+        RETURNING id;
+        '''
+        params = (str(self.__active_user['id']), test_id, 0, 0)
+        result = execute_query(query, params)
+        return result['id']
 
     @log_decorator
     def join_test(self):
