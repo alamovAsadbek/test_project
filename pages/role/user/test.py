@@ -153,3 +153,7 @@ class Test:
         pagination = Pagination(table_name='tests', keys=['name', 'test_id', 'status', 'created_at'], data=result_get)
         pagination.page_tab()
         return True
+
+    @log_decorator
+    def join_test(self):
+        pass
