@@ -334,7 +334,7 @@ class Test:
         return True
 
     @log_decorator
-    def get_test(self, test_id: int):
+    def get_test(self, test_id: int, belong_user: bool = False):
         """
         Retrieves details of a specific test, including its questions and options,
         from the database. Returns a dictionary with test details and questions.
@@ -353,8 +353,11 @@ class Test:
         query = '''
         SELECT * FROM tests WHERE TEST_ID=%s and user_id!=%s
         '''
-
-        # Parameters for the SQL query.
+        if belong_user:
+            query = '''
+                    SELECT * FROM tests WHERE TEST_ID=%s and user_id=%s
+            '''
+            # Parameters for the SQL query.
         params = (test_id, self.__active_user['id'])
 
         # Execute the query to retrieve the test details.
