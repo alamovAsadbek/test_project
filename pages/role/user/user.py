@@ -45,3 +45,7 @@ class User:
     def statistics_test(self):
         self.__test.view_statistics_on_tests()
         return True
+
+    @log_decorator
+    def statistics_test_questions(self):
+        pass
