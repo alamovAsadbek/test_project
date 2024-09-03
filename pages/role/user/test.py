@@ -197,7 +197,7 @@ class Test:
                 options = []
             data['options'] = options
             all_tests['questions'].append(data)
-        print(all_tests)
+        return all_tests
 
     @log_decorator
     def join_test(self):
@@ -207,11 +207,8 @@ class Test:
             return False
         print("Test searching...")
         result_get = self.get_test(test_id=test_id)
-        # for question in questions:
-        #     query = '''
-        #     SELECT * FROM OPTIONS WHERE QUESTION_ID=%s
-        #     '''
-        #     params = (question["id"],)
-        #     options.append(execute_query(query, params, fetch='all'))
-        # print(options)
+        if result_get is False:
+            print("Something went wrong")
+            return False
+        print(result_get)
         print("Test started")
