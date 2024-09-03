@@ -166,6 +166,11 @@ class Test:
                 SELECT * FROM tests WHERE TEST_ID=%s and user_id!=%s
                 '''
         params = (test_id, self.__active_user['id'])
+        get_test = execute_query(query, params, fetch='one')
+        if get_test is None:
+            print("Test not found")
+            return False
+        print(f'\nTEST ID: {get_test["test_id"]}\nTest Name: {get_test["name"]}\n')
 
     @log_decorator
     def join_test(self):
@@ -175,15 +180,8 @@ class Test:
             print("Can't join test")
             return False
         result_get = self.get_test(test_id=test_id)
-        query = '''
-        SELECT * FROM tests WHERE TEST_ID=%s and user_id!=%s
-        '''
-        params = (test_id, self.__active_user['id'])
-        get_test = execute_query(query, params, fetch='one')
-        if get_test is None:
-            print("Test not found")
-            return False
-        print(f'\nTEST ID: {get_test["test_id"]}\nTest Name: {get_test["name"]}\n')
+
+
         print("The test is being prepared...")
         query = '''
         SELECT * FROM QUESTIONS WHERE TEST_ID=%s
