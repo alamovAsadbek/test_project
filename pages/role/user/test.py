@@ -210,5 +210,8 @@ class Test:
         if result_get is False:
             print("Something went wrong")
             return False
-        print(result_get)
+        for index, question in enumerate(result_get['questions']):
+            print(f"Question {index + 1}")
+            print('\n', question['question_name'])
+
         print("Test started")
