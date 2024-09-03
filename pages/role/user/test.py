@@ -93,30 +93,54 @@ class Test:
 
     @log_decorator
     def create_test(self):
+        """
+        Creates a new test with a specified number of questions and answers.
+        Prompts the user for test details and iteratively adds questions and answers.
+
+        Returns:
+        - bool: True if the test is successfully created; False otherwise.
+        """
+
+        # Prompt the user to enter test details.
         test_name: str = input("Enter test name: ").strip()
         number_of_questions: int = int(input("Enter number of questions: ").strip())
         number_of_answers: int = int(input("Enter number of answers: ").strip())
+
+        # Validate the input values.
         if number_of_questions < 1 or number_of_answers < 1:
             print("Numbers must be greater than 1")
             return False
+
+        # Generate a unique test ID.
         test_id = generate_password()
         print(f"Your test id: {test_id}")
+
+        # SQL query to insert the test into the database.
         query = '''
         INSERT INTO tests (user_id, name, test_id) VALUES (%s, %s, %s)
         RETURNING ID
         '''
+
+        # Parameters for the query: user ID, test name, and test ID.
         params = (self.__active_user['id'], test_name, test_id)
+
+        # Execute the query to insert the test and fetch the new ID.
         print("Waiting...")
         result = execute_query(query, params, fetch='one')
         self.__test_id = result['id']
+
+        # Iterate to add questions and answers to the test.
         for ques in range(number_of_questions):
             print(f"Question {ques + 1}")
             self.question_func()
             for q_answer in range(number_of_answers):
                 print(f'Question: {ques + 1} / Question answer: {q_answer + 1}')
                 self.question_answer()
+
+        # Confirm that the test was created successfully.
         print(f"Your test id: {test_id}")
         print("Test created successfully")
+
         return True
 
     @log_decorator
