@@ -585,4 +585,5 @@ class Test:
 
     @log_decorator
     def view_statistics_on_questions(self):
-        pass
+        test_id: int = int(input("Enter a test ID: ").strip())
+        result_get = self.get_test(test_id)
