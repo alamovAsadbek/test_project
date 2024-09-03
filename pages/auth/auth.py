@@ -106,15 +106,24 @@ class Auth:
 
     @log_decorator
     def create_answers_table(self):
-        self.create_test_table()
+        """
+        Creates the 'answers' table if it doesn't already exist.
+        The table stores the answers provided by users including ID, user ID (foreign key),
+        test ID (foreign key), number of correct and wrong answers, and creation timestamp.
+        Also ensures the 'tests' table exists.
+
+        Returns:
+        - bool: True if the table is created successfully.
+        """
+        self.create_test_table()  # Ensure the 'tests' table exists
         query = '''
         CREATE TABLE IF NOT EXISTS answers (
-        ID SERIAL PRIMARY KEY,
-        USER_ID BIGINT REFERENCES users(ID) ON DELETE CASCADE NOT NULL,
-        TEST_ID BIGINT REFERENCES tests(ID) ON DELETE CASCADE NOT NULL,
-        CORRECT_ANSWERS BIGINT NOT NULL,
-        WRONG_ANSWERS BIGINT NOT NULL,
-        CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            ID SERIAL PRIMARY KEY,
+            USER_ID BIGINT REFERENCES users(ID) ON DELETE CASCADE NOT NULL,
+            TEST_ID BIGINT REFERENCES tests(ID) ON DELETE CASCADE NOT NULL,
+            CORRECT_ANSWERS BIGINT NOT NULL,
+            WRONG_ANSWERS BIGINT NOT NULL,
+            CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
         '''
         execute_query(query)
