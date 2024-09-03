@@ -5,10 +5,11 @@ from main_files.decorator.decorator_func import log_decorator
 
 
 class Pagination:
-    def __init__(self, table_name, keys, user_id=None):
+    def __init__(self, table_name, keys, user_id=None, data=None):
         self.table_name = table_name
         self.keys = keys
         self.user_id = user_id
+        self.data = data
 
     @log_decorator
     def __read_table(self):
@@ -24,7 +25,9 @@ class Pagination:
 
     @log_decorator
     def page_tab(self, page_number: int = 1, page_size=2):
-        datas = self.__read_table()
+        datas = self.data
+        if self.data is None:
+            datas = self.__read_table()
         while True:
             if datas is None:
                 print("Data not found")
