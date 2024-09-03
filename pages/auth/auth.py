@@ -227,7 +227,7 @@ class Auth:
         # Generate a username and password for the new user.
         username = get_username(name=first_name)
         password = generate_password()
-        hash_password = self.hash_password(password)
+        hash_password = self.hash_password(password.__str__())
 
         print(f"\nYour username: {username}\nYour password: {password}")
 
