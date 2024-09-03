@@ -30,7 +30,7 @@ class Pagination:
         if datas is None:
             datas = self.__read_table()
         while True:
-            if datas is None:
+            if datas is None or len(datas) == 0:
                 print("Data not found")
                 return False
             result_data = self.get_page_data(page_number, page_size, datas)
