@@ -202,7 +202,7 @@ class Auth:
         Hashes a password using SHA-256.
 
         Args:
-        - password (str): The password to hash.
+        - password (int): The password to hash.
 
         Returns:
         - str: The hashed password.
@@ -212,19 +212,33 @@ class Auth:
 
     @log_decorator
     def register(self):
+        """
+        Registers a new user by collecting their first name, last name,
+        generating a username and password, and storing these details in the database.
+
+        Returns:
+        - bool: True if the registration is successful.
+        """
         first_name: str = input("First Name: ").strip()
         last_name: str = input("Last Name: ").strip()
+
         print("Your account is being created...")
+
+        # Generate a username and password for the new user.
         username = get_username(name=first_name)
         password = generate_password()
         hash_password = self.hash_password(password)
+
         print(f"\nYour username: {username}\nYour password: {password}")
+
+        # SQL query to insert the new user into the database.
         query = '''
         INSERT INTO users (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD) 
         VALUES (%s, %s, %s, %s);
         '''
         params = (first_name, last_name, username, hash_password)
         threading.Thread(target=execute_query, args=(query, params)).start()
+
         print("Register successfully")
         return True
 
