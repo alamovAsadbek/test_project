@@ -607,6 +607,9 @@ class Test:
         if result_get is False:
             return False
         for index, test in enumerate(result_get['questions']):
+            result_true = self.get_answer_count(question_id=test['question_id'], is_true=True)
+            result_false = self.get_answer_count(question_id=test['question_id'], is_true=False)
+            print(result_true, result_false)
             print(f"Question {index + 1}: {test['question_name']}")
             for index_opt, option in enumerate(test['options']):
                 if option['is_true']:
