@@ -141,4 +141,13 @@ class Test:
 
     @log_decorator
     def show_all_tests(self):
+        query = '''
+        SELECT * FROM tests WHERE user_id!=%s
+        '''
+        params = (str(self.__active_user['id']),)
+        result_get = execute_query(query, params, fetch='all')
+        if result_get is None:
+            print("Test not found")
+            return False
+        print(result_get)
         pagination = Pagination(table_name='tests', keys=['name', 'test_id', 'status', 'created_at'])
