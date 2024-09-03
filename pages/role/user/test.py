@@ -162,4 +162,16 @@ class Test:
 
     @log_decorator
     def join_test(self):
-        pass
+        test_id = int(input("Enter test id and enter 0 to exit: "))
+        if test_id == 0:
+            print("Can't join test")
+            return False
+        query = '''
+        SELECT * FROM tests WHERE TEST_ID=%s and user_id!=%s
+        '''
+        params = (test_id, self.__active_user['id'])
+        get_test = execute_query(query, params, fetch='one')
+        if get_test is None:
+            print("Test not found")
+            return False
+        print(get_test)
