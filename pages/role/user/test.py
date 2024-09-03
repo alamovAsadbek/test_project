@@ -203,6 +203,8 @@ class Test:
 
     @log_decorator
     def join_test(self):
+        current_answer = 0
+        wrong_answer = 0
         init(autoreset=True)
         test_id = int(input("Enter test id and enter 0 to exit: ").strip())
         if test_id == 0:
@@ -223,8 +225,13 @@ class Test:
                 print(Fore.RED + "You have selected the wrong answer. Please select again")
                 choose_option: int = int(input(Fore.BLUE + "\tChoose an option: "))
             select_option = result_get['questions'][index]['options'][choose_option - 1]
-            print(select_option['is_true'])
             if select_option['is_true']:
                 print(Fore.GREEN + "Your answer is correct")
+                current_answer += 1
             else:
                 print(Fore.RED + "Your answer is incorrect")
+                wrong_answer += 1
+        print(f"\nNumber of questions: {len(result_get['questions'])}\n"
+              f"Current answer: {current_answer}\n"
+              f"Wrong answer: {wrong_answer}")
+        return True
