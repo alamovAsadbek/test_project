@@ -38,14 +38,22 @@ class Auth:
 
     @log_decorator
     def create_test_table(self):
+        """
+        Creates the 'tests' table if it doesn't already exist.
+        The table stores test information including ID, user ID (foreign key), test name,
+        test ID, creation timestamp, and status.
+
+        Returns:
+        - bool: True if the table is created successfully.
+        """
         query = '''
         CREATE TABLE IF NOT EXISTS tests (
-        ID BIGSERIAL PRIMARY KEY,
-        USER_ID BIGINT REFERENCES users(ID) ON DELETE CASCADE NOT NULL,
-        NAME VARCHAR(255) NOT NULL,
-        TEST_ID BIGINT NOT NULL,
-        CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-        STATUS VARCHAR(255) NOT NULL DEFAULT 'Active'
+            ID BIGSERIAL PRIMARY KEY,
+            USER_ID BIGINT REFERENCES users(ID) ON DELETE CASCADE NOT NULL,
+            NAME VARCHAR(255) NOT NULL,
+            TEST_ID BIGINT NOT NULL,
+            CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+            STATUS VARCHAR(255) NOT NULL DEFAULT 'Active'
         )
         '''
         execute_query(query)
