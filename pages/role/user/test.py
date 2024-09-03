@@ -162,7 +162,8 @@ class Test:
 
     @log_decorator
     def join_test(self):
-        test_id = int(input("Enter test id and enter 0 to exit: "))
+        options = []
+        test_id = int(input("Enter test id and enter 0 to exit: ").strip())
         if test_id == 0:
             print("Can't join test")
             return False
@@ -174,4 +175,17 @@ class Test:
         if get_test is None:
             print("Test not found")
             return False
-        print(get_test)
+        print(f'\nTEST ID: {get_test["test_id"]}\nTest Name: {get_test["name"]}\n')
+        print("The test is being prepared...")
+        query = '''
+        SELECT * FROM QUESTIONS WHERE TEST_ID=%s
+        '''
+        params = (test_id,)
+        questions = execute_query(query, params, fetch='all')
+        for question in questions:
+            query = '''
+            SELECT * FROM OPTIONS WHERE QUESTION_ID=%s
+            '''
+            params = (question["id"],)
+            options.append(execute_query(query, params, fetch='all'))
+        print("Test started")
