@@ -594,4 +594,9 @@ class Test:
         result_get = self.get_test(test_id, belong_user=True)
         if result_get is False:
             return False
-        print(result_get)
+        for index, test in enumerate(result_get['questions']):
+            print(f"Question {index + 1}: {test['name']}\n")
+            print(test['question_name'])
+            for index, option in enumerate(test['options']):
+                pass
+
