@@ -217,5 +217,8 @@ class Test:
                 print(f'\t{index_opt + 1}: {option["name"]}')
             while True:
                 choose_option: int = int(input("Choose an option: "))
+                while choose_option not in range(1, len(question['options']) + 1):
+                    print("You have selected the wrong answer. Please select again")
+                    choose_option: int = int(input("Choose an option: "))
 
         print("Test started")
