@@ -89,25 +89,58 @@ class Test:
 
     @log_decorator
     def update_test(self):
+        """
+        Updates the name of a test based on the provided test ID.
+        The user must provide the test ID and a new name for the test.
+
+        Returns:
+        - bool: True if the test is successfully updated; False if the test is not found or the operation is canceled.
+        """
+
+        # Prompt the user to enter the test ID they wish to update. Entering 0 will cancel the operation.
         test_id: int = int(input("Enter test id and enter 0 to exit: "))
+
+        # If the user enters 0, cancel the operation and return False.
         if test_id == 0:
             return False
+
+        # SQL query to select the test to be updated, ensuring it belongs to the active user.
         query = '''
-        SELECT * FROM tests WHERE id=%s and user_id=%s
+        SELECT * FROM tests WHERE id=%s AND user_id=%s
         '''
+
+        # Parameters for the query: test ID and the active user's ID.
         params = (test_id, self.__active_user['id'])
+
+        # Execute the query to fetch the test details.
         get_test = execute_query(query, params, fetch='one')
+
+        # Check if the test was found. If not, notify the user and return False.
         if get_test is None:
             print("Test not found")
             return False
+
+        # Display the details of the test to the user.
         print(f"\nID: {get_test['id']}\nName: {get_test['name']}\nCreated at: {get_test['created_at']}\n")
+
+        # Prompt the user to enter the new name for the test.
         name = input("Enter new name: ").strip()
+
+        # SQL query to update the test name based on its ID.
         query = '''
         UPDATE tests SET name=%s WHERE id=%s
         '''
+
+        # Parameters for the update query: new name and test ID.
         params = (name, test_id)
+
+        # Execute the update query in a separate thread to avoid blocking the main thread.
         threading.Thread(target=execute_query, args=(query, params)).start()
+
+        # Notify the user that the test has been updated successfully.
         print("Updated test successfully")
+
+        # Return True to indicate that the update operation was successful.
         return True
 
     @log_decorator
