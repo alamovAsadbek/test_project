@@ -14,15 +14,23 @@ class Auth:
 
     @log_decorator
     def create_user_table(self):
+        """
+        Creates the 'users' table if it doesn't already exist.
+        The table stores user information including ID, first name, last name,
+        username, password, login status, and account creation timestamp.
+
+        Returns:
+        - bool: True if the table is created successfully.
+        """
         query = '''
         CREATE TABLE IF NOT EXISTS users (
-        ID SERIAL PRIMARY KEY,
-        FIRST_NAME VARCHAR(255) NOT NULL,
-        LAST_NAME VARCHAR(255) NOT NULL,
-        USERNAME VARCHAR(255) NOT NULL UNIQUE,
-        PASSWORD VARCHAR(255) NOT NULL,
-        IS_LOGIN BOOLEAN DEFAULT FALSE,
-        CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            ID SERIAL PRIMARY KEY,
+            FIRST_NAME VARCHAR(255) NOT NULL,
+            LAST_NAME VARCHAR(255) NOT NULL,
+            USERNAME VARCHAR(255) NOT NULL UNIQUE,
+            PASSWORD VARCHAR(255) NOT NULL,
+            IS_LOGIN BOOLEAN DEFAULT FALSE,
+            CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
         '''
         execute_query(query)
