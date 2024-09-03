@@ -7,7 +7,7 @@ from main_files.decorator.decorator_func import log_decorator
 class Pagination:
     def __init__(self, table_name, table_keys, display_keys=None, user_id=None, data=None):
         self.table_name = table_name
-        self.keys = table_keys
+        self.table_keys = table_keys
         self.user_id = user_id
         self.data = data
         if display_keys is None:
@@ -37,8 +37,8 @@ class Pagination:
             result_data = self.get_page_data(page_number, page_size, datas)
             for data in result_data:
                 print("\n")
-                for key in self.keys:
-                    print(f"{key}: {data[f'{key}']}")
+                for display_key, table_key in zip(self.display_keys, self.table_keys):
+                    print(f"{display_key}: {data[f'{table_key}']}")
             print(f"""\n1 <- {page_number}/{math.ceil(len(datas) / page_size)} -> 2\n""")
             choice = input("Enter, type exit to exit: ").strip()
             if choice == "exit":
