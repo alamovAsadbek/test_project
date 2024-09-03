@@ -219,7 +219,8 @@ class Test:
                 choose_option: int = int(input("Choose an option: "))
                 while choose_option not in range(1, len(question['options']) + 1):
                     print("You have selected the wrong answer. Please select again")
-                    choose_option: int = int(input("Choose an option: "))
-                select_option = result_get['options'][choose_option - 1]
+                    choose_option: int = int(input("\tChoose an option: "))
+                select_option = result_get['questions'][index]['options'][choose_option - 1]
+                print(select_option['is_true'])
                 print(select_option)
         print("Test started")
