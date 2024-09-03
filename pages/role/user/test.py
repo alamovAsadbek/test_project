@@ -222,6 +222,8 @@ class Test:
             return False
         print("Test searching...")
         result_get = self.get_test(test_id=test_id)
+        get_answer_id = threading.Thread(target=self.insert_answer_table, args=(result_get['test_id'],)).start()
+        print(get_answer_id)
         if result_get is False:
             print("Something went wrong")
             return False
