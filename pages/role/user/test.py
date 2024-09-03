@@ -223,7 +223,6 @@ class Test:
         print("Test searching...")
         result_get = self.get_test(test_id=test_id)
         get_answer_id = self.insert_answer_table(test_id=result_get["test_id"])
-        print(get_answer_id)
         if result_get is False:
             print("Something went wrong")
             return False
@@ -243,6 +242,11 @@ class Test:
             else:
                 print(Fore.RED + "Your answer is incorrect")
                 wrong_answer += 1
+            query = '''
+            INSERT INTO answer_items (user_id, question_id, is_true, answer_id) VALUES (%s, %s, %s, %s)
+            '''
+            params = (str(self.__active_user['id']), question['question_id'], get_answer_id, True, get_answer_id)
+            threading.Thread(target=execute_query, args=(query, params)).start()
         print(f"\nNumber of questions: {len(result_get['questions'])}\n"
               f"Current answer: {current_answer}\n"
               f"Wrong answer: {wrong_answer}")
