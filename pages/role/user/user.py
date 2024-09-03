@@ -38,4 +38,5 @@ class User:
 
     @log_decorator
     def my_result(self):
-        pass
+        self.__test.my_results()
+        return True
