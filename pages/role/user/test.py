@@ -588,7 +588,14 @@ class Test:
 
     @log_decorator
     def get_answer_count(self, is_true: bool, question_id: int):
-        pass
+        query = '''
+        SELECT COUNT(*)
+        FROM answer_items
+        WHERE question_id = %s AND is_true = %s;
+        '''
+        params = (question_id, is_true)
+        results = execute_query(query, params, fetch='all')
+        return results
 
     @log_decorator
     def view_statistics_on_questions(self):
