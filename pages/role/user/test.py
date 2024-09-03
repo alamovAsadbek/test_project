@@ -172,7 +172,8 @@ class Test:
             print("Test not found")
             return False
         print(f'\nTEST ID: {get_test["test_id"]}\nTest Name: {get_test["name"]}\n')
-        all_tests.update({'test_id': get_test["id"], 'joined_id': get_test["test_id"], 'test_name': get_test["name"]})
+        all_tests.update({'test_id': get_test["id"], 'joined_id': get_test["test_id"], 'test_name': get_test["name"],
+                          'questions': []})
         print("The test is being prepared...")
         query = '''
                 SELECT id, name FROM QUESTIONS WHERE TEST_ID=%s
@@ -182,20 +183,21 @@ class Test:
         if questions is None:
             print("No test questions found")
             return False
-        for question in questions:
+        for index, question in enumerate(questions):
             data = {
                 'question_id': question['id'],
                 'question_name': question['name'],
             }
             query = '''
-            SELECT * FROM OPTIONS WHERE QUESTION_ID=%s
+            SELECT name, is_true FROM OPTIONS WHERE QUESTION_ID=%s
             '''
             params = (question['id'],)
             options = execute_query(query, params, fetch='all')
             if options is None:
                 options = []
             data['options'] = options
-            print(data)
+            all_tests['questions'].append(data)
+        print(all_tests)
 
     @log_decorator
     def join_test(self):
