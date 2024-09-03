@@ -12,8 +12,8 @@ class User:
         return self.__test
 
     @log_decorator
-    def show_all_tests(self):
-        self.__test.show_all_tests()
+    def show_my_tests(self):
+        self.__test.show_my_tests()
         return True
 
     @log_decorator

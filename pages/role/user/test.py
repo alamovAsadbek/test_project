@@ -77,7 +77,7 @@ class Test:
         return True
 
     @log_decorator
-    def show_all_tests(self):
+    def show_my_tests(self):
         print("Waiting...")
         pagination = Pagination(table_name='tests', keys=['id', 'name', 'test_id', 'status', 'created_at'],
                                 user_id=self.__active_user['id'])
