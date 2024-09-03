@@ -153,7 +153,7 @@ def tests_menu():
             user.show_all_tests()
         elif user_input == 3:
             print("\n<-\t Home / Tests / My tests\t ->\n")
-            pass
+            user.my_result()
         elif user_input == 4:
             return user_menu()
         else:
