@@ -148,15 +148,15 @@ def tests_menu():
             pass
         elif user_input == 2:
             print("\n<-\t Home / Tests / Show all test\t ->\n")
-            pass
+            user.show_all_tests()
         elif user_input == 3:
             print("\n<-\t Home / Tests / My tests\t ->\n")
             pass
         elif user_input == 4:
-            user_menu()
+            return user_menu()
         else:
             print("Invalid input")
-            tests_menu()
+        tests_menu()
     except Exception as e:
         print(f'Error: {e}')
         tests_menu()
