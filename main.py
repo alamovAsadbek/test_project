@@ -132,6 +132,8 @@ def my_test_menu():
 
 @log_decorator
 def tests_menu():
+    print("Waiting...")
+    user = User()
     text = '''
 1. Join test
 2. Show all test
