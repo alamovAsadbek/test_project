@@ -85,6 +85,8 @@ def user_menu():
             print("\n<-\t Home / Statistics\t ->\n")
             statistics_menu()
         elif user_input == 4:
+            print("Waiting...")
+            auth.logout()
             auth_menu()
         else:
             print("Invalid input")
