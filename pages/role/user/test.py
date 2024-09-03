@@ -220,7 +220,7 @@ class Test:
                 print(f'\t{index_opt + 1}: {option["name"]}')
             choose_option: int = int(input("Choose an option: "))
             while choose_option not in range(1, len(question['options']) + 1):
-                print("You have selected the wrong answer. Please select again")
+                print(Fore.RED + "You have selected the wrong answer. Please select again")
                 choose_option: int = int(input(Fore.BLUE + "\tChoose an option: "))
             select_option = result_get['questions'][index]['options'][choose_option - 1]
             print(select_option['is_true'])
