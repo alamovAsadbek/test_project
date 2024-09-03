@@ -79,7 +79,8 @@ class Test:
     @log_decorator
     def show_my_tests(self):
         print("Waiting...")
-        pagination = Pagination(table_name='tests', keys=['id', 'name', 'test_id', 'status', 'created_at'],
+        pagination = Pagination(table_name='tests', table_keys=['id', 'name', 'test_id', 'status', 'created_at'],
+                                display_keys=["ID", "Name", "Test id", "Status", "Created"],
                                 user_id=self.__active_user['id'])
         pagination.page_tab()
         return True
@@ -153,7 +154,8 @@ class Test:
         if result_get is None:
             print("Test not found")
             return False
-        pagination = Pagination(table_name='tests', keys=['name', 'test_id', 'first_name', 'last_name'],
+        pagination = Pagination(table_name='tests', table_keys=['name', 'test_id', 'first_name', 'last_name'],
+                                display_keys=["Test name", "Test id", "Owner first name", "Owner last name"],
                                 data=result_get)
         pagination.page_tab()
         return True
