@@ -161,6 +161,10 @@ class Test:
         return True
 
     @log_decorator
+    def get_test(self):
+        pass
+
+    @log_decorator
     def join_test(self):
         options = []
         test_id = int(input("Enter test id and enter 0 to exit: ").strip())
@@ -185,6 +189,7 @@ class Test:
         if questions is None:
             print("No test questions found")
             return False
+        print(questions)
         for question in questions:
             query = '''
             SELECT * FROM OPTIONS WHERE QUESTION_ID=%s
