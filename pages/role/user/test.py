@@ -203,12 +203,33 @@ class Test:
 
     @log_decorator
     def insert_answer_table(self, test_id):
+        """
+        Inserts a new record into the 'answers' table with initial values for
+        CORRECT_ANSWERS and WRONG_ANSWERS set to 0, and returns the ID of the new record.
+
+        Parameters:
+        - test_id (int): The ID of the test for which the answer record is being created.
+
+        Returns:
+        - int: The ID of the newly created answer record.
+        """
+
+        # SQL query to insert a new record into the 'answers' table and return the new record's ID.
         query = '''
-        INSERT INTO answers (user_id, test_id, CORRECT_ANSWERS, WRONG_ANSWERS) VALUES (%s, %s, %s, %s)
+        INSERT INTO answers (user_id, test_id, CORRECT_ANSWERS, WRONG_ANSWERS) 
+        VALUES (%s, %s, %s, %s)
         RETURNING id;
         '''
+
+        # Parameters to be used in the SQL query.
+        # Converts user ID to string, sets initial counts for correct and wrong answers to 0.
         params = (str(self.__active_user['id']), test_id, 0, 0)
+
+        # Execute the query with the specified parameters.
+        # Fetches the ID of the newly inserted record.
         result = execute_query(query, params, fetch='one')
+
+        # Return the ID of the newly inserted record.
         return result['id']
 
     @log_decorator
