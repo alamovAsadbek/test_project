@@ -25,3 +25,7 @@ class User:
     def delete_test(self):
         self.__test.delete_test()
         return True
+
+    @log_decorator
+    def show_all_tests(self):
+        pass
