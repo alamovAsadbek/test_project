@@ -198,7 +198,16 @@ class Auth:
 
     @log_decorator
     def hash_password(self, password):
-        hashed_password = hashlib.sha256(password.__str__().encode('utf-8'))
+        """
+        Hashes a password using SHA-256.
+
+        Args:
+        - password (str): The password to hash.
+
+        Returns:
+        - str: The hashed password.
+        """
+        hashed_password = hashlib.sha256(password.encode('utf-8'))
         return hashed_password.hexdigest()
 
     @log_decorator
