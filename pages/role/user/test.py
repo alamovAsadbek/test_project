@@ -141,6 +141,7 @@ class Test:
 
     @log_decorator
     def show_all_tests(self):
+        print("Waiting...")
         query = '''
         SELECT * FROM tests WHERE user_id != %s
         '''
@@ -150,4 +151,5 @@ class Test:
             print("Test not found")
             return False
         print(result_get)
-        pagination = Pagination(table_name='tests', keys=['name', 'test_id', 'status', 'created_at'])
+        pagination = Pagination(table_name='tests', keys=['name', 'test_id', 'status', 'created_at'], data=result_get)
+        pagination.page_tab()
