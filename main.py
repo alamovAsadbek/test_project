@@ -170,7 +170,8 @@ def statistics_menu():
     user = User()
     text = '''
 1. View statistics on tests
-2. Back
+2. View statistics on test questions
+3. Back
     '''
     print(text)
     try:
@@ -181,6 +182,8 @@ def statistics_menu():
             print("Waiting...")
             user.statistics_test()
         elif user_input == 2:
+            pass
+        elif user_input == 3:
             return user_menu()
         else:
             print("Invalid input")
