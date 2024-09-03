@@ -544,4 +544,15 @@ class Test:
 
     @log_decorator
     def my_results(self):
-        pass
+        query = '''
+        SELECT a.correct_answers, a.wrong_answers, t.name, t.test_id
+        FROM tests t
+        INNER JOIN answers a ON t.id = a.test_id
+        WHERE a.user_id = %s
+        '''
+        params = (str(self.__active_user['id']),)
+        results = execute_query(query, params, fetch='all')
+        if results is None:
+            print("Test not found")
+            return False
+        print(results)
