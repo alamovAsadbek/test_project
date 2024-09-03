@@ -161,7 +161,7 @@ class Test:
         return True
 
     @log_decorator
-    def get_test(self):
+    def get_test(self, test_id: int):
         pass
 
     @log_decorator
@@ -171,6 +171,7 @@ class Test:
         if test_id == 0:
             print("Can't join test")
             return False
+        result_get = self.get_test(test_id=test_id)
         query = '''
         SELECT * FROM tests WHERE TEST_ID=%s and user_id!=%s
         '''
