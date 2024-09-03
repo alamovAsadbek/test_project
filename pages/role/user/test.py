@@ -251,5 +251,10 @@ class Test:
         print(f"\nNumber of questions: {len(result_get['questions'])}\n"
               f"Current answer: {current_answer}\n"
               f"Wrong answer: {wrong_answer}")
+        query = '''
+        UPDATE ANSWER SET CORRECT_ANSWERS=%s AND WRONG_ANSWERS=%s WHERE id=%s
+        '''
+        params = (current_answer, wrong_answer, get_answer_id)
+        threading.Thread(target=execute_query, args=(query, params)).start()
         print("\nThe test is over\n")
         return True
