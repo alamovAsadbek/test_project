@@ -182,10 +182,14 @@ class Test:
         '''
         params = (test_id,)
         questions = execute_query(query, params, fetch='all')
+        if questions is None:
+            print("No test questions found")
+            return False
         for question in questions:
             query = '''
             SELECT * FROM OPTIONS WHERE QUESTION_ID=%s
             '''
             params = (question["id"],)
             options.append(execute_query(query, params, fetch='all'))
+        print(options)
         print("Test started")
