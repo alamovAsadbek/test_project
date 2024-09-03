@@ -597,6 +597,5 @@ class Test:
         for index, test in enumerate(result_get['questions']):
             print(f"Question {index + 1}: {test['name']}\n")
             print(test['question_name'])
-            for index, option in enumerate(test['options']):
-                pass
-
+            for index_opt, option in enumerate(test['options']):
+                print(f'\t{index_opt + 1}: {option["name"]}')
