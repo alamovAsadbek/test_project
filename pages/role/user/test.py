@@ -171,8 +171,9 @@ class Test:
             print("Test not found")
             return False
         print(f'\nTEST ID: {get_test["test_id"]}\nTest Name: {get_test["name"]}\n')
+        print("The test is being prepared...")
         query = '''
-                SELECT * FROM QUESTIONS WHERE TEST_ID=%s
+                SELECT id, name FROM QUESTIONS WHERE TEST_ID=%s
                 '''
         params = (get_test['id'],)
         questions = execute_query(query, params, fetch='all')
@@ -188,7 +189,7 @@ class Test:
         if test_id == 0:
             print("Can't join test")
             return False
-        print("The test is being prepared...")
+        print("Test searching...")
         result_get = self.get_test(test_id=test_id)
         # for question in questions:
         #     query = '''
