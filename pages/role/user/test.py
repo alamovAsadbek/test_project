@@ -1,6 +1,6 @@
 import threading
 
-from colorama import Fore
+from colorama import Fore, init
 
 from components.pagination.pagination import Pagination
 from components.random_password.generate_password import generate_password
@@ -203,6 +203,7 @@ class Test:
 
     @log_decorator
     def join_test(self):
+        init(autoreset=True)
         test_id = int(input("Enter test id and enter 0 to exit: ").strip())
         if test_id == 0:
             print("Can't join test")
@@ -220,12 +221,10 @@ class Test:
             choose_option: int = int(input("Choose an option: "))
             while choose_option not in range(1, len(question['options']) + 1):
                 print("You have selected the wrong answer. Please select again")
-                choose_option: int = int(input("\tChoose an option: "))
+                choose_option: int = int(input(Fore.BLUE + "\tChoose an option: "))
             select_option = result_get['questions'][index]['options'][choose_option - 1]
             print(select_option['is_true'])
             if select_option['is_true']:
                 print(Fore.GREEN + "Your answer is correct")
             else:
                 print(Fore.RED + "Your answer is incorrect")
-
-        print("Test started")
