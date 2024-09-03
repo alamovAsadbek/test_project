@@ -598,4 +598,6 @@ class Test:
             print(f"Question {index + 1}: {test['name']}\n")
             print(test['question_name'])
             for index_opt, option in enumerate(test['options']):
+                if option['is_true']:
+                    print(Fore.GREEN + f'\t{index_opt + 1}: {option["name"]}')
                 print(f'\t{index_opt + 1}: {option["name"]}')
