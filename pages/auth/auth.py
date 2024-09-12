@@ -1,10 +1,10 @@
 import hashlib
 import threading
 
-from components.random_password.generate_password import generate_password
-from components.random_username.generate_username import get_username
-from main_files.database.db_setting import execute_query
-from main_files.decorator.decorator_func import log_decorator
+from pythonProject.components.random_password.generate_password import generate_password
+from pythonProject.components.random_username.generate_username import get_username
+from pythonProject.main_files.database.db_setting import execute_query
+from pythonProject.main_files.decorator.decorator_func import log_decorator
 
 
 class Auth:
